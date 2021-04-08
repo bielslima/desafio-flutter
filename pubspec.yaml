@@ -14,12 +14,43 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   
+  # Route management
+  fluro: ^2.0.3
+
   # Http client
   dio: ^4.0.0
+
+  # Notfications
+  overlay_support: ^1.2.0
+
+  # Dependency injection
+  get_it: ^6.0.0
+
+  # Data parse
+  json_annotation: ^4.0.1
+
+  # Equality Comparisons
+  equatable: ^2.0.0
+
+  # State management
+  mobx: ^2.0.1
+  flutter_mobx: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  # State management
+  mobx_codegen: ^2.0.1+2
+
+  # Data parse
+  json_serializable: ^4.1.0
+
+  # Dependency injection
+  injectable_generator: ^1.2.2
+
+  # Code generation
+  build_runner: ^1.12.2
 
 flutter:
   uses-material-design: true
