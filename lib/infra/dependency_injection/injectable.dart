@@ -9,7 +9,7 @@ final getIt = GetIt.instance;
   initializerName: r'$initGetIt',
   preferRelativeImports: true,
   asExtension: false,
-  usesNullSafety: false,
+  usesNullSafety: true,
 )
 Future init() async {
   $initGetIt(getIt);
