@@ -8,23 +8,18 @@ class HttpImpl implements HttpClient {
 
   HttpImpl(this.client) {
     this.client.options = BaseOptions(
-      baseUrl: Constants.BASE_URL_SWAPI,
+      baseUrl: InfraConstants.BASE_URL_SWAPI,
     );
   }
 
-  Map<String, dynamic>? _makeHeaders(Map<String, dynamic>? headers) {
-    final Map<String, dynamic>? _headers;
-    if (headers != null)
-      _headers = headers
-        ..addAll(
-          {
-            'content-type': 'application/json',
-            'accept': 'application/json',
-          },
-        );
-    else
-      _headers = {};
-
+  Map<String, dynamic>? _makeHeaders(Map<String, dynamic> headers) {
+    late final Map<String, dynamic> _headers = headers
+      ..addAll(
+        {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      );
     return _headers;
   }
 
@@ -38,7 +33,7 @@ class HttpImpl implements HttpClient {
           path,
           queryParameters: queryParameters ?? {},
           options: Options(
-            headers: this._makeHeaders(headers),
+            headers: this._makeHeaders(headers ?? {}),
           ),
         );
   }
@@ -54,7 +49,7 @@ class HttpImpl implements HttpClient {
           data: body ?? {},
           queryParameters: queryParameters ?? {},
           options: Options(
-            headers: this._makeHeaders(headers),
+            headers: this._makeHeaders(headers ?? {}),
           ),
         );
   }

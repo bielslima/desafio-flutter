@@ -17,7 +17,7 @@ class People {
   final String eyeColor;
   final String birthYear;
   final String male;
-  @JsonKey(defaultValue: [Constants.DEFAULT_PEOPLE_SPECIE])
+  @JsonKey(defaultValue: [InfraConstants.DEFAULT_PEOPLE_SPECIE])
   final List<String> species;
 
   People(

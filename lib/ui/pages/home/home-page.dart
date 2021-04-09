@@ -9,10 +9,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text(
-            "Home Page",
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              Text("HomePage"),
+            ],
           ),
         ),
       ),

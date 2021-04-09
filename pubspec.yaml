@@ -14,6 +14,9 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   
+  # Animations
+  lottie: ^1.0.1
+
   # Route management
   fluro: ^2.0.3
 
@@ -54,3 +57,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - lib/ui/assets/animations/bb8-loading.json
+    

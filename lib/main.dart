@@ -26,9 +26,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Stars Wiki',
+      debugShowCheckedModeBanner: false,
       theme: buildThemeApp(),
-      onGenerateRoute: appController.router?.generator,
-      initialRoute: RouterPaths.HOME,
+      onGenerateRoute: appController.router.generator,
+      initialRoute: RouterPaths.SPLASH,
     );
   }
 }
