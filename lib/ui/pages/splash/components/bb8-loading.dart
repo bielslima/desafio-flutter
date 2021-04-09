@@ -11,12 +11,12 @@ class BB8Animation extends StatefulWidget {
 
 class _BB8AnimationState extends State<BB8Animation>
     with TickerProviderStateMixin {
-  late final AnimationController _animationController;
+  // late final AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    this._animationController = AnimationController(vsync: this);
+    // this._animationController = AnimationController(vsync: this);
   }
 
   @override
@@ -26,7 +26,7 @@ class _BB8AnimationState extends State<BB8Animation>
         UiConstants.ANIMATION_LOADING_SPLASH,
         height: ScreenHelper.screenHeight(context) * .3,
         frameRate: FrameRate(60),
-        controller: _animationController,
+        repeat: true,
       ),
     );
   }

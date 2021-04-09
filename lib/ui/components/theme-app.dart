@@ -5,5 +5,6 @@ ThemeData buildThemeApp() {
 
   return new ThemeData(
     primaryColor: primaryColor,
+    fontFamily: 'Poppins',
   );
 }

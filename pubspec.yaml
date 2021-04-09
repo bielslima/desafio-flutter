@@ -57,7 +57,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: lib/ui/assets/fonts/Poppins-*.ttf
   assets:
     - lib/ui/assets/animations/bb8-loading.json
     

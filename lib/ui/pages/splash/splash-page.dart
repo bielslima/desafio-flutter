@@ -36,8 +36,11 @@ class _SplashPageState extends State<SplashPage> {
                 BB8Animation(),
                 Spacer(),
                 Text(
-                  'Splash',
+                  'StarWiki',
                   textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 Spacer(),
               ],
