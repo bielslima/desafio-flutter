@@ -1,6 +1,5 @@
 import 'package:fluro/fluro.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:popcode_challenge_swapi/ui/pages/splash/splash-page.dart';
+import 'package:flutter/material.dart';
 
 import '../../ui/pages/pages.dart';
 
@@ -17,6 +16,6 @@ class RoutesHandles {
 
   static Handler detailsHandle = Handler(
     handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
-        HomePage(),
+        DetailsPage(),
   );
 }

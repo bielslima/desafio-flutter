@@ -60,7 +60,14 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: lib/ui/assets/fonts/Poppins-*.ttf
+        - asset: lib/ui/assets/fonts/Poppins/Poppins-Bold.ttf
+        - asset: lib/ui/assets/fonts/Poppins/Poppins-Light.ttf
+        - asset: lib/ui/assets/fonts/Poppins/Poppins-Italic.ttf
+        - asset: lib/ui/assets/fonts/Poppins/Poppins-Medium.ttf
+        - asset: lib/ui/assets/fonts/Poppins/Poppins-Regular.ttf
   assets:
     - lib/ui/assets/animations/bb8-loading.json
+    - lib/ui/assets/images/logo-app-dark.png
+    - lib/ui/assets/images/logo-app-light.png
+    - lib/ui/assets/images/1.png
     

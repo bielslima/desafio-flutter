@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../infra/app/application-controller.dart';
 import '../../../infra/dependency-injection/injectable.dart';
-// import '../../../infra/routes/routes.dart';
+import '../../../infra/routes/routes.dart';
 import './components/components.dart';
 
 class SplashPage extends StatefulWidget {
@@ -16,14 +16,15 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    // Future.delayed(Duration(seconds: 3))
-    //     .then((_) => appController.navigateTo(context, RouterPaths.HOME));
+    Future.delayed(Duration(seconds: 5))
+        .then((_) => appController.navigateTo(context, RouterPaths.HOME));
   }
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
+        color: Colors.grey,
         child: Stack(
           children: [
             Column(
@@ -31,17 +32,11 @@ class _SplashPageState extends State<SplashPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Spacer(
-                  flex: 2,
+                  flex: 3,
                 ),
                 BB8Animation(),
                 Spacer(),
-                Text(
-                  'StarWiki',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
+                Logo(),
                 Spacer(),
               ],
             ),

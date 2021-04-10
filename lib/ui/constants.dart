@@ -1,7 +1,8 @@
 class UiConstants {
   static const String ANIMATION_LOADING_SPLASH =
       'lib/ui/assets/animations/bb8-loading.json';
+  static const String LOGO_APP = 'lib/ui/assets/images/logo-app-light.png';
+  static const String LOGO_APP_DARK = 'lib/ui/assets/images/logo-app-dark.png';
 
-  static const String BACKGROUND_DARTH_VADER =
-      'lib/ui/assets/images/background-darth-vader.png';
+  static const double PADDING_DEFAULT = 30.0;
 }

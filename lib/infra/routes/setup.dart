@@ -10,13 +10,13 @@ class SetupRoute {
     );
 
     router.define(
-      RouterPaths.HOME,
-      handler: RoutesHandles.homeHandler,
+      RouterPaths.DETAILS,
+      handler: RoutesHandles.detailsHandle,
     );
 
     router.define(
-      RouterPaths.DETAILS,
-      handler: RoutesHandles.detailsHandle,
+      RouterPaths.HOME,
+      handler: RoutesHandles.homeHandler,
     );
   }
 }

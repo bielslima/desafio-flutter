@@ -16,7 +16,9 @@ abstract class _ApplicationControllerBase with Store {
     BuildContext context,
     String path, {
     bool clearStack = false,
+    TransitionType transitionType = TransitionType.native,
   }) {
-    return this.router.navigateTo(context, path, clearStack: clearStack);
+    return this.router.navigateTo(context, path,
+        clearStack: clearStack, transition: transitionType);
   }
 }
