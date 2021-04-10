@@ -18,4 +18,9 @@ class RoutesHandles {
     handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
         DetailsPage(),
   );
+
+  static Handler searchHandle = Handler(
+    handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
+        SearchPage(),
+  );
 }

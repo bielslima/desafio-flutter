@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:popcode_challenge_swapi/ui/constants.dart';
 
 import '../../../infra/app/application-controller.dart';
 import '../../../infra/dependency-injection/injectable.dart';
@@ -24,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        color: Colors.grey,
+        color: UiConstants.COLOR_BACKGROUND,
         child: Stack(
           children: [
             Column(

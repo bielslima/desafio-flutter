@@ -5,6 +5,7 @@ import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.da
 import 'package:popcode_challenge_swapi/infra/routes/routes.dart';
 import 'package:popcode_challenge_swapi/ui/components/app-header.dart';
 
+import '../../constants.dart';
 import 'components/components.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,21 +18,27 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AppHeader(
-            Logo(),
-          ),
-          Text("HomePage"),
-          ElevatedButton(
-            onPressed: () {
-              appControl.navigateTo(context, RouterPaths.DETAILS,
-                  transitionType: TransitionType.fadeIn);
-            },
-            child: Text('Go to details'),
-          )
-        ],
+      body: Container(
+        color: UiConstants.COLOR_BACKGROUND,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            AppHeader(
+              Logo(),
+              action: IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () => appControl.navigateTo(
+                  context,
+                  RouterPaths.SEARCH,
+                  transitionType: TransitionType.fadeIn,
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListInfiniteScroll(),
+            ),
+          ],
+        ),
       ),
     );
   }

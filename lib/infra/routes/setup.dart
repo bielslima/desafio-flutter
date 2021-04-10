@@ -18,5 +18,10 @@ class SetupRoute {
       RouterPaths.HOME,
       handler: RoutesHandles.homeHandler,
     );
+
+    router.define(
+      RouterPaths.SEARCH,
+      handler: RoutesHandles.searchHandle,
+    );
   }
 }
