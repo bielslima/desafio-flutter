@@ -1,22 +1,41 @@
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../infra/constants.dart';
 part 'people.g.dart';
 
+@HiveType(typeId: 1)
 @JsonSerializable(
   anyMap: true,
   fieldRename: FieldRename.snake,
-  includeIfNull: false,
+  includeIfNull: true,
 )
-class People {
+class People extends HiveObject {
+  @HiveField(0)
   final String name;
-  final double height;
-  final double mass;
+
+  @HiveField(1)
+  final String height;
+
+  @HiveField(2)
+  final String mass;
+
+  @HiveField(3)
   final String hairColor;
+
+  @HiveField(4)
   final String skinColor;
+
+  @HiveField(5)
   final String eyeColor;
+
+  @HiveField(6)
   final String birthYear;
-  final String male;
+
+  @HiveField(7)
+  final String gender;
+
+  @HiveField(8)
   @JsonKey(defaultValue: [InfraConstants.DEFAULT_PEOPLE_SPECIE])
   final List<String> species;
 
@@ -28,7 +47,7 @@ class People {
     this.skinColor,
     this.eyeColor,
     this.birthYear,
-    this.male,
+    this.gender,
     this.species,
   );
 

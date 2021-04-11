@@ -1,7 +1,7 @@
 // import 'package:fluro/fluro.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:popcode_challenge_swapi/infra/app/application-controller.dart';
+import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/ui/components/theme-app.dart';
 
 import './infra/routes/routes.dart';
@@ -14,7 +14,7 @@ void main() async {
 }
 
 class App extends StatelessWidget {
-  final ApplicationController appController = di.getIt<ApplicationController>();
+  final ApplicationStore appController = di.getIt<ApplicationStore>();
 
   App() {
     final router = FluroRouter();

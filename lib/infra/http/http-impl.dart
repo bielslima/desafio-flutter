@@ -2,11 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:popcode_challenge_swapi/infra/constants.dart';
 
 import '../../data/http/http.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(
+  as: HttpClient,
+)
 class HttpImpl implements HttpClient {
-  final Dio client;
+  late Dio client;
 
-  HttpImpl(this.client) {
+  HttpImpl() {
+    this.client = Dio();
     this.client.options = BaseOptions(
       baseUrl: InfraConstants.BASE_URL_SWAPI,
     );

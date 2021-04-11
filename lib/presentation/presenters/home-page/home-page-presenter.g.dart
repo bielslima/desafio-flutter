@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'splash-presenter.dart';
+part of 'home-page-presenter.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,7 +8,7 @@ part of 'splash-presenter.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$SplashPresenterImp on _SplashPresenterImpBase, Store {
+mixin _$HomePagePresenterImpl on _HomePagePresenterImplBase, Store {
   @override
   String toString() {
     return '''

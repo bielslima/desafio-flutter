@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:popcode_challenge_swapi/ui/constants.dart';
 
-import '../../../infra/app/application-controller.dart';
+import '../../../ui/constants.dart';
+import '../../../infra/app/application-store.dart';
 import '../../../infra/dependency-injection/injectable.dart';
 import '../../../infra/routes/routes.dart';
+import '../../../presentation/presenters/splash-page/splash-presenter.dart';
 import './components/components.dart';
 
 class SplashPage extends StatefulWidget {
@@ -12,12 +13,14 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  ApplicationController appController = getIt<ApplicationController>();
+  final ApplicationStore appController = getIt<ApplicationStore>();
+  final SplashPresenter presenter = getIt<SplashPresenter>();
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 5))
+    presenter
+        .updateLocalData()
         .then((_) => appController.navigateTo(context, RouterPaths.HOME));
   }
 

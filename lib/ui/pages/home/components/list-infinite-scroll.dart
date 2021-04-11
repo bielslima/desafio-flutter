@@ -1,13 +1,13 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:popcode_challenge_swapi/infra/app/application-controller.dart';
+import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 import 'package:popcode_challenge_swapi/infra/routes/routes.dart';
 
 import 'components.dart';
 
 class ListInfiniteScroll extends StatelessWidget {
-  final ApplicationController appControl = getIt<ApplicationController>();
+  final ApplicationStore appControl = getIt<ApplicationStore>();
 
   @override
   Widget build(BuildContext context) {
