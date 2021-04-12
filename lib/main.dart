@@ -1,6 +1,7 @@
 // import 'package:fluro/fluro.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/ui/components/theme-app.dart';
 
@@ -24,12 +25,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Stars Wiki',
-      debugShowCheckedModeBanner: false,
-      theme: buildThemeApp(),
-      onGenerateRoute: appController.router.generator,
-      initialRoute: RouterPaths.SPLASH,
+    return OverlaySupport(
+      child: MaterialApp(
+        title: 'Stars Wiki',
+        debugShowCheckedModeBanner: false,
+        theme: buildThemeApp(),
+        onGenerateRoute: appController.router.generator,
+        initialRoute: RouterPaths.SPLASH,
+      ),
     );
   }
 }

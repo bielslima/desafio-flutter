@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:popcode_challenge_swapi/data/http/http-client.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
@@ -6,17 +5,22 @@ import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.da
 import '../../constants.dart';
 
 abstract class IPeopleRepository {
-  Future findPeoples();
+  Future findPeoples(int page);
+  Future findPeople(String idPeople);
 }
 
 @injectable
 class PeopleRepository implements IPeopleRepository {
-  Future<Response> findPeoples({String? path}) async {
-    return getIt<HttpClient>().httpGet(path ?? InfraConstants.ENDPOINT_PEOPLES);
+  Future<dynamic> findPeoples(int page, {String? path}) async {
+    return getIt<HttpClient>().httpGet(
+      path ?? InfraConstants.ENDPOINT_PEOPLES,
+      queryParameters: {
+        'page': page.toString(),
+      },
+    );
   }
 
-  Future<Response> findPeople(String idPeople) async {
-    return getIt<HttpClient>()
-        .httpGet("${InfraConstants.ENDPOINT_PEOPLES}/$idPeople");
+  Future<dynamic> findPeople(String path) async {
+    return getIt<HttpClient>().httpGet(path);
   }
 }

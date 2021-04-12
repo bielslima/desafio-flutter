@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../infra/constants.dart';
 part 'people.g.dart';
 
 @HiveType(typeId: 1)
@@ -36,8 +35,10 @@ class People extends HiveObject {
   final String gender;
 
   @HiveField(8)
-  @JsonKey(defaultValue: [InfraConstants.DEFAULT_PEOPLE_SPECIE])
   final List<String> species;
+
+  @HiveField(9)
+  final String homeworld;
 
   People(
     this.name,
@@ -49,6 +50,7 @@ class People extends HiveObject {
     this.birthYear,
     this.gender,
     this.species,
+    this.homeworld,
   );
 
   factory People.fromJson(Map json) => _$PeopleFromJson(json);

@@ -26,13 +26,14 @@ class PeopleAdapter extends TypeAdapter<People> {
       fields[6] as String,
       fields[7] as String,
       (fields[8] as List).cast<String>(),
+      fields[9] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, People obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class PeopleAdapter extends TypeAdapter<People> {
       ..writeByte(7)
       ..write(obj.gender)
       ..writeByte(8)
-      ..write(obj.species);
+      ..write(obj.species)
+      ..writeByte(9)
+      ..write(obj.homeworld);
   }
 
   @override
@@ -78,8 +81,8 @@ People _$PeopleFromJson(Map json) {
     json['eye_color'] as String,
     json['birth_year'] as String,
     json['gender'] as String,
-    (json['species'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-        ['https://swapi.dev/api/species/1'],
+    (json['species'] as List<dynamic>).map((e) => e as String).toList(),
+    json['homeworld'] as String,
   );
 }
 
@@ -93,4 +96,5 @@ Map<String, dynamic> _$PeopleToJson(People instance) => <String, dynamic>{
       'birth_year': instance.birthYear,
       'gender': instance.gender,
       'species': instance.species,
+      'homeworld': instance.homeworld,
     };

@@ -15,8 +15,10 @@ class RoutesHandles {
   );
 
   static Handler detailsHandle = Handler(
-    handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
-        DetailsPage(),
+    handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+      int indexPeople = int.parse(params["id"][0]);
+      return DetailsPage(indexPeople);
+    },
   );
 
   static Handler searchHandle = Handler(

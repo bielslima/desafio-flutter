@@ -25,7 +25,7 @@ dependencies:
   fluro: ^2.0.3
 
   # Http client
-  dio: ^4.0.0
+  http: ^0.13.1
 
   # Notfications
   overlay_support: ^1.2.0
@@ -45,6 +45,9 @@ dependencies:
   
   # State network
   connectivity: ^3.0.3
+  
+  # Metadata
+  after_layout: ^1.1.0
 
 dev_dependencies:
   flutter_test:

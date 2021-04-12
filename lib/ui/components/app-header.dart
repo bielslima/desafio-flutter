@@ -4,11 +4,11 @@ import 'package:popcode_challenge_swapi/ui/utils/screen-helper.dart';
 class AppHeader extends StatelessWidget {
   final bool centerTitle;
   final bool backButton;
-  final Widget title;
+  final Widget? title;
   final Widget? action;
 
-  AppHeader(
-    this.title, {
+  AppHeader({
+    this.title,
     this.centerTitle = false,
     this.backButton = false,
     this.action,
@@ -28,7 +28,7 @@ class AppHeader extends StatelessWidget {
                     Navigator.pop(context);
                   })
               : Container(),
-          title,
+          title ?? Container(),
           Spacer(),
           this.action ?? Container(),
         ],

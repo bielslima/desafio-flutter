@@ -9,7 +9,7 @@ part of 'query-peoples.dart';
 QueryPeoples _$QueryPeoplesFromJson(Map json) {
   return QueryPeoples(
     json['count'] as int,
-    json['next'] as String,
+    json['next'] as String? ?? '',
     json['previous'] as String? ?? '',
     (json['results'] as List<dynamic>)
         .map((e) => People.fromJson(e as Map))

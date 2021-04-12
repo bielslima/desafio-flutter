@@ -1,4 +1,6 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:popcode_challenge_swapi/ui/utils/notification-service.dart';
 
 import '../../../ui/constants.dart';
 import '../../../infra/app/application-store.dart';
@@ -21,7 +23,19 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     presenter
         .updateLocalData()
-        .then((_) => appController.navigateTo(context, RouterPaths.HOME));
+        .then(
+          (_) => appController.navigateTo(
+            context,
+            RouterPaths.HOME,
+            transitionType: TransitionType.fadeIn,
+            clearStack: true,
+          ),
+        )
+        .onError((error, stackTrace) {
+      // NotificationService.showToastError(
+      //     'Failed to fetch data: ${error.toString()}');
+      // print(stackTrace);
+    });
   }
 
   @override

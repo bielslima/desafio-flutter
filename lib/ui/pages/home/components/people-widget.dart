@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 import 'package:popcode_challenge_swapi/ui/pages/home/components/feature.dart';
 
 class PeopleWidget extends StatelessWidget {
+  People people;
+  PeopleWidget(this.people);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +24,7 @@ class PeopleWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Luke Skywallker',
+                  people.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context)
@@ -45,7 +48,7 @@ class PeopleWidget extends StatelessWidget {
               children: [
                 FeatureWidget(
                   'Gender',
-                  'Male',
+                  people.gender,
                   valueStyle: Theme.of(context)
                       .textTheme
                       .subtitle2
@@ -54,7 +57,7 @@ class PeopleWidget extends StatelessWidget {
                 ),
                 FeatureWidget(
                   'Height',
-                  '35,5',
+                  people.height,
                   valueStyle: Theme.of(context)
                       .textTheme
                       .subtitle2
@@ -63,7 +66,7 @@ class PeopleWidget extends StatelessWidget {
                 ),
                 FeatureWidget(
                   'Mass',
-                  '35,5',
+                  people.mass,
                   valueStyle: Theme.of(context)
                       .textTheme
                       .subtitle2

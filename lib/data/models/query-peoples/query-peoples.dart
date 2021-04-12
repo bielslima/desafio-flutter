@@ -9,6 +9,7 @@ part 'query-peoples.g.dart';
 )
 class QueryPeoples {
   int count;
+  @JsonKey(defaultValue: '')
   String next;
   @JsonKey(defaultValue: '')
   String previous;
