@@ -1,6 +1,9 @@
 // import 'package:fluro/fluro.dart';
+import 'dart:io';
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/ui/components/theme-app.dart';
@@ -12,6 +15,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(App());
+}
+
+void initHiveDatabase() {
+  var path = Directory.current.path;
+  Hive.init(path);
 }
 
 class App extends StatelessWidget {

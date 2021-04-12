@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     presenter
-        .updateLocalData()
+        .findPeoples()
         .then(
           (_) => appController.navigateTo(
             context,

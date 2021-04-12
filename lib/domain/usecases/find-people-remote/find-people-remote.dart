@@ -5,7 +5,7 @@ import 'package:popcode_challenge_swapi/infra/repositories/People/people-reposit
 class FindPeopleRemote {
   static Future<People> execute(String idPeople) async {
     return getIt<PeopleRepository>()
-        .findPeople(idPeople)
+        .findPeopleRemote(idPeople)
         .then((data) => People.fromJson(data));
   }
 }

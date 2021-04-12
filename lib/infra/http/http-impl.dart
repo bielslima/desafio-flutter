@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:injectable/injectable.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 import 'package:popcode_challenge_swapi/infra/constants.dart';
 import '../../data/http/http.dart';
@@ -10,6 +9,15 @@ import '../../data/http/http.dart';
   as: HttpClient,
 )
 class HttpImpl implements HttpClient {
+  final Dio dio = Dio();
+
+  _makeOptions(Map<String, String> headers, Map<String, dynamic> queryParams) {
+    this.dio.options = BaseOptions(
+      headers: _makeHeaders(headers),
+      queryParameters: queryParams,
+    );
+  }
+
   Map<String, String> _makeHeaders(Map<String, String> headers) {
     late final Map<String, String> _headers = headers
       ..addAll(
@@ -30,14 +38,19 @@ class HttpImpl implements HttpClient {
     try {
       final Uri uri =
           Uri.https(InfraConstants.BASE_URL_SWAPI, path, queryParameters);
+
       print("[GET] => ${uri.toString()}");
-      http.Response res = await http.get(
-        uri,
-        headers: this._makeHeaders(headers ?? {}),
+
+      this._makeOptions(headers ?? {}, queryParameters ?? {});
+
+      Response res = await dio.get(
+        uri.toString(),
       );
+
       print("RES => ${res.statusCode}");
+
       if (res.statusCode == 200)
-        return jsonDecode(res.body);
+        return res.data;
       else
         throw 'Request status code: ${res.statusCode}';
     } catch (e) {
@@ -54,13 +67,14 @@ class HttpImpl implements HttpClient {
   }) async {
     try {
       print("[POST] => ${InfraConstants.BASE_URL_SWAPI}/$path");
-      http.Response res = await http.post(
-        Uri.https(InfraConstants.BASE_URL_SWAPI, path, queryParameters),
-        body: body,
-        headers: this._makeHeaders(headers ?? {}),
-      );
-      print("RES => ${res.statusCode}");
-      return jsonDecode(res.body);
+      return {};
+      // Response res = await Dio().post(
+      //   Uri.https(InfraConstants.BASE_URL_SWAPI, path, queryParameters),
+      //   body: body,
+      //   headers: this._makeHeaders(headers ?? {}),
+      // );
+      // print("RES => ${res.statusCode}");
+      // return jsonDecode(res.data);
     } catch (e) {
       print(e);
     }

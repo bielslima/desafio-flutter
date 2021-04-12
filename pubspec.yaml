@@ -25,7 +25,7 @@ dependencies:
   fluro: ^2.0.3
 
   # Http client
-  http: ^0.13.1
+  dio: ^4.0.0
 
   # Notfications
   overlay_support: ^1.2.0

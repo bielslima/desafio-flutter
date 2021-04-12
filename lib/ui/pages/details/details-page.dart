@@ -45,7 +45,7 @@ class _DetailsPageState extends State<DetailsPage>
           ),
           Container(
             width: ScreenHelper.screenWidth(context),
-            height: 400,
+            height: 100,
             child: Stack(
               children: [
                 Observer(builder: (context) {
@@ -55,37 +55,69 @@ class _DetailsPageState extends State<DetailsPage>
                     child: Container(
                       padding:
                           EdgeInsets.only(left: UiConstants.PADDING_DEFAULT),
-                      child: Text(
-                        this._people.name,
-                        style: Theme.of(context).textTheme.headline4?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            this._people.name,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                Theme.of(context).textTheme.headline4?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                          ),
+                        ],
                       ),
-                      width: ScreenHelper.screenWidth(context) * .5,
-                      height: 350,
+                      width: ScreenHelper.screenWidth(context),
                     ),
                     left: _presenter.x,
                   );
                 }),
-                Observer(
-                  builder: (context) => AnimatedPositioned(
-                    duration: durationAnimation,
-                    curve: Curves.decelerate,
-                    child: Container(
-                      child: Image.asset(
-                        'lib/ui/assets/images/1.png',
-                        fit: BoxFit.cover,
-                      ),
-                      width: ScreenHelper.screenWidth(context) * .5,
-                      height: 350,
-                    ),
-                    right: _presenter.x2,
-                  ),
-                ),
               ],
             ),
           ),
+          Expanded(
+            child: Container(
+              width: ScreenHelper.screenWidth(context),
+              child: Stack(
+                children: [
+                  Observer(builder: (context) {
+                    return AnimatedPositioned(
+                      duration: durationAnimation,
+                      curve: Curves.decelerate,
+                      child: Container(
+                        padding:
+                            EdgeInsets.only(left: UiConstants.PADDING_DEFAULT),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              this._people.name,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                            ),
+                          ],
+                        ),
+                        width: ScreenHelper.screenWidth(context),
+                      ),
+                      right: _presenter.x2,
+                    );
+                  }),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

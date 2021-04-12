@@ -3,12 +3,10 @@ import 'package:popcode_challenge_swapi/infra/repositories/People/people-reposit
 
 import '../../../data/models/query-peoples/query-peoples.dart';
 
-class FindPeoplesRemote {
+class FindPeoplesLocal {
   static Future<QueryPeoples> execute({int? page}) async {
-    return getIt<PeopleRepository>().findPeoplesRemote(page: page ?? 1).then(
-          (data) => QueryPeoples.fromJson(
-            data,
-          ),
+    return getIt<PeopleRepository>().findPeoplesLocal(page ?? 1).then(
+          (data) => QueryPeoples.fromJson(data),
         );
   }
 }
