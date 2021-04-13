@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:injectable/injectable.dart';
 import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
-import 'package:popcode_challenge_swapi/data/models/query-peoples/query-peoples.dart';
+import 'package:popcode_challenge_swapi/data/models/query-peoples-model/query-peoples.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/find-peoples-remote/find-peoples-remote.dart';
 import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';

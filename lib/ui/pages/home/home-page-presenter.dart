@@ -1,5 +1,5 @@
 import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
-import 'package:popcode_challenge_swapi/data/models/query-peoples/query-peoples.dart';
+import 'package:popcode_challenge_swapi/data/models/query-peoples-model/query-peoples.dart';
 
 abstract class IHomePagePresenter {
   Future toggleFavorite();

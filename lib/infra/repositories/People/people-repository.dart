@@ -18,7 +18,7 @@ class PeopleRepository implements IPeopleRepository {
 
   Future<dynamic> findPeoplesRemote({String? path, int? page}) async {
     return getIt<HttpClient>().httpGet(
-      path ?? InfraConstants.ENDPOINT_PEOPLES,
+      path ?? InfraConstants.BASE_URL_SWAPI + InfraConstants.ENDPOINT_PEOPLES,
       queryParameters: {
         'page': page.toString(),
       },
@@ -31,7 +31,7 @@ class PeopleRepository implements IPeopleRepository {
     int? page,
   }) async {
     return getIt<HttpClient>().httpGet(
-      path ?? InfraConstants.ENDPOINT_PEOPLES,
+      path ?? InfraConstants.BASE_URL_SWAPI + InfraConstants.ENDPOINT_PEOPLES,
       queryParameters: {
         'search': inputExpression,
         // 'page': page ?? 1,

@@ -28,6 +28,8 @@ class _DetailsPageState extends State<DetailsPage>
   void initState() {
     super.initState();
     this._people = this._homePagePresenter.peoples[widget.indexPeople];
+    _presenter.findHomeWorld(this._people.homeworld);
+    _presenter.findSpecies(this._people.species);
   }
 
   @override
@@ -95,17 +97,198 @@ class _DetailsPageState extends State<DetailsPage>
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              this._people.name,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Height:',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: ' ${this._people.height}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )
+                                      ],
+                                    ),
                                   ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Mass:',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: ' ${this._people.mass}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Hair Color:',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: ' ${this._people.hairColor}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Skin Color:',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: ' ${this._people.skinColor}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Eye Color:',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: ' ${this._people.eyeColor}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Birth year:',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: ' ${this._people.birthYear}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Gender:',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: ' ${this._people.gender}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Observer(
+                                    builder: (_) => RichText(
+                                      text: TextSpan(
+                                        text: 'Home world:',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6,
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text:
+                                                ' ${this._presenter.planet?.name}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Specie:',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: ' ${this._people.species}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

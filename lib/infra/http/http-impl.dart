@@ -36,16 +36,11 @@ class HttpImpl implements HttpClient {
     Map<String, String>? headers,
   }) async {
     try {
-      final Uri uri =
-          Uri.https(InfraConstants.BASE_URL_SWAPI, path, queryParameters);
-
-      print("[GET] => ${uri.toString()}");
+      print("[GET] => $path");
 
       this._makeOptions(headers ?? {}, queryParameters ?? {});
 
-      Response res = await dio.get(
-        uri.toString(),
-      );
+      Response res = await dio.get(path);
 
       print("RES => ${res.statusCode}");
 
@@ -66,7 +61,7 @@ class HttpImpl implements HttpClient {
     Map<String, String>? headers,
   }) async {
     try {
-      print("[POST] => ${InfraConstants.BASE_URL_SWAPI}/$path");
+      // print("[POST] => ${InfraConstants.BASE_URL_SWAPI}/$path");
       return {};
       // Response res = await Dio().post(
       //   Uri.https(InfraConstants.BASE_URL_SWAPI, path, queryParameters),
@@ -77,6 +72,37 @@ class HttpImpl implements HttpClient {
       // return jsonDecode(res.data);
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<dynamic> multipleHttpGet(
+    List<String> endPoints, {
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  }) async {
+    try {
+      this._makeOptions(headers ?? {}, queryParameters ?? {});
+
+      List teste = await Future.wait(
+        endPoints
+            .map(
+              (String endPointToGet) => dio.get(
+                endPointToGet,
+              ),
+            )
+            .toList(),
+      );
+
+      print("RESULTADO MULTIPLE REQUEST");
+
+      teste.forEach((element) {
+        print(element);
+      });
+
+      return [];
+    } catch (e) {
+      rethrow;
     }
   }
 }

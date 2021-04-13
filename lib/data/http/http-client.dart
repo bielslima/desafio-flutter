@@ -12,4 +12,11 @@ abstract class HttpClient {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   });
+
+  Future<dynamic> multipleHttpGet(
+    List<String> endPoints, {
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  });
 }

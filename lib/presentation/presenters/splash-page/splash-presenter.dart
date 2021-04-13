@@ -2,7 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:injectable/injectable.dart';
 import 'package:popcode_challenge_swapi/data/local-storage/local-storage.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/find-peoples-remote/find-peoples-remote.dart';
-import 'package:popcode_challenge_swapi/data/models/query-peoples/query-peoples.dart';
+import 'package:popcode_challenge_swapi/data/models/query-peoples-model/query-peoples.dart';
 import 'package:popcode_challenge_swapi/infra/constants.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 import 'package:popcode_challenge_swapi/infra/utils/NetworkStatus.dart';

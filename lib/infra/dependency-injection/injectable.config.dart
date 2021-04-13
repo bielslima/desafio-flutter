@@ -12,16 +12,18 @@ import '../../data/local-storage/local-storage.dart' as _i6;
 import '../../presentation/presenters/details-page/details-page-presenter.dart'
     as _i3;
 import '../../presentation/presenters/home-page/home-page-presenter.dart'
-    as _i12;
+    as _i14;
 import '../../presentation/presenters/search-page/search-page-presenter.dart'
-    as _i9;
-import '../../presentation/presenters/splash-page/splash-presenter.dart'
     as _i10;
-import '../app/application-store.dart' as _i11;
+import '../../presentation/presenters/splash-page/splash-presenter.dart'
+    as _i12;
+import '../app/application-store.dart' as _i13;
 import '../http/http-impl.dart' as _i5;
 import '../local-storage/hive-storage.dart' as _i7;
-import '../repositories/People/people-repository.dart'
-    as _i8; // ignore_for_file: unnecessary_lambdas
+import '../repositories/People/people-repository.dart' as _i8;
+import '../repositories/Planet/planet-repository.dart' as _i9;
+import '../repositories/Specie/specie-repository.dart'
+    as _i11; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -32,9 +34,11 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i4.HttpClient>(() => _i5.HttpImpl());
   gh.factory<_i6.LocalStorage>(() => _i7.LocalStorageImpl());
   gh.factory<_i8.PeopleRepository>(() => _i8.PeopleRepository());
-  gh.factory<_i9.SearchPagePresenter>(() => _i9.SearchPagePresenter());
-  gh.factory<_i10.SplashPresenter>(() => _i10.SplashPresenter());
-  gh.singleton<_i11.ApplicationStore>(_i11.ApplicationStore());
-  gh.singleton<_i12.HomePagePresenter>(_i12.HomePagePresenter());
+  gh.factory<_i9.PlanetRepository>(() => _i9.PlanetRepository());
+  gh.factory<_i10.SearchPagePresenter>(() => _i10.SearchPagePresenter());
+  gh.factory<_i11.SpecieRepository>(() => _i11.SpecieRepository());
+  gh.factory<_i12.SplashPresenter>(() => _i12.SplashPresenter());
+  gh.singleton<_i13.ApplicationStore>(_i13.ApplicationStore());
+  gh.singleton<_i14.HomePagePresenter>(_i14.HomePagePresenter());
   return get;
 }
