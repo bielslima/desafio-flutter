@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 // import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
-import 'package:popcode_challenge_swapi/infra/constants.dart';
 import '../../data/http/http.dart';
 
 @Injectable(
@@ -84,7 +83,7 @@ class HttpImpl implements HttpClient {
     try {
       this._makeOptions(headers ?? {}, queryParameters ?? {});
 
-      List teste = await Future.wait(
+      List response = await Future.wait(
         endPoints
             .map(
               (String endPointToGet) => dio.get(
@@ -94,13 +93,7 @@ class HttpImpl implements HttpClient {
             .toList(),
       );
 
-      print("RESULTADO MULTIPLE REQUEST");
-
-      teste.forEach((element) {
-        print(element);
-      });
-
-      return [];
+      return response.map((e) => e.data).toList();
     } catch (e) {
       rethrow;
     }

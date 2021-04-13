@@ -28,8 +28,10 @@ class _DetailsPageState extends State<DetailsPage>
   void initState() {
     super.initState();
     this._people = this._homePagePresenter.peoples[widget.indexPeople];
-    _presenter.findHomeWorld(this._people.homeworld);
-    _presenter.findSpecies(this._people.species);
+    // _presenter.findHomeWorld(this._people.homeworld);
+    // _presenter.findSpecies(this._people.species);
+    _presenter.findHomeWorldAndSpecies(
+        this._people.homeworld, this._people.species);
   }
 
   @override
@@ -247,46 +249,88 @@ class _DetailsPageState extends State<DetailsPage>
                             Row(
                               children: [
                                 Expanded(
-                                  child: Observer(
-                                    builder: (_) => RichText(
-                                      text: TextSpan(
-                                        text: 'Home world:',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6,
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text:
-                                                ' ${this._presenter.planet?.name}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1,
+                                  child: Observer(builder: (_) {
+                                    return this
+                                            ._presenter
+                                            .isFetchingPlanetAndSpecie
+                                        ? Row(
+                                            children: [
+                                              Text(
+                                                "Searching home world  ",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline6,
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                                width: 20,
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            ],
                                           )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                        : RichText(
+                                            text: TextSpan(
+                                              text: 'Home world:',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline6,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text:
+                                                      ' ${this._presenter.planet?.name ?? 'Unknown'}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle1,
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                  }),
                                 ),
                               ],
                             ),
                             Row(
                               children: [
                                 Expanded(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: 'Specie:',
-                                      style:
-                                          Theme.of(context).textTheme.headline6,
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: ' ${this._people.species}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle1,
-                                        )
-                                      ],
-                                    ),
-                                  ),
+                                  child: Observer(builder: (_) {
+                                    return this
+                                            ._presenter
+                                            .isFetchingPlanetAndSpecie
+                                        ? Row(
+                                            children: [
+                                              Text(
+                                                "Searching specie  ",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline6,
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                                width: 20,
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            ],
+                                          )
+                                        : RichText(
+                                            text: TextSpan(
+                                              text: 'Specie:',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline6,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text:
+                                                      ' ${this._presenter.specie?.name ?? 'Unknown'}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle1,
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                  }),
                                 ),
                               ],
                             ),

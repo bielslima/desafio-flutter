@@ -19,6 +19,9 @@ abstract class _DetailsPagePresenterBase
     with Store
     implements IDetailsPagePresenter {
   @observable
+  bool isFetchingPlanetAndSpecie = true;
+
+  @observable
   Specie? specie;
 
   @observable
@@ -39,15 +42,29 @@ abstract class _DetailsPagePresenterBase
   @action
   _setSpecie(Specie s) => this.specie = s;
 
+  @action
+  _setIsFetchingPlanetAndSpecie(bool v) => this.isFetchingPlanetAndSpecie = v;
+
   void initAnimation() {
     this._setAnimation(0, 0);
   }
 
-  void findHomeWorld(String endpoint) {
-    FindPlanetRemote.execute(endpoint).then(_setPlanet);
+  void findHomeWorldAndSpecies(String endpoint, List<String> endpoints) {
+    Future.wait([
+      FindPlanetRemote.execute(endpoint),
+      FindSpeciesRemote.execute(endpoints),
+    ]).then((result) {
+      this._setIsFetchingPlanetAndSpecie(false);
+      this._setPlanet(result[0]);
+      if (result[1].length != 0) this._setSpecie(result[1][0]);
+    });
   }
 
-  void findSpecies(List<String> endpoints) {
-    FindSpeciesRemote.execute(endpoints).then(print);
-  }
+  // void findHomeWorld(String endpoint) {
+  //   FindPlanetRemote.execute(endpoint).then(_setPlanet);
+  // }
+
+  // void findSpecies(List<String> endpoints) {
+  //   FindSpeciesRemote.execute(endpoints).then(print);
+  // }
 }

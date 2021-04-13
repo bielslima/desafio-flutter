@@ -9,6 +9,23 @@ part of 'details-page-presenter.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DetailsPagePresenter on _DetailsPagePresenterBase, Store {
+  final _$isFetchingPlanetAndSpecieAtom =
+      Atom(name: '_DetailsPagePresenterBase.isFetchingPlanetAndSpecie');
+
+  @override
+  bool get isFetchingPlanetAndSpecie {
+    _$isFetchingPlanetAndSpecieAtom.reportRead();
+    return super.isFetchingPlanetAndSpecie;
+  }
+
+  @override
+  set isFetchingPlanetAndSpecie(bool value) {
+    _$isFetchingPlanetAndSpecieAtom
+        .reportWrite(value, super.isFetchingPlanetAndSpecie, () {
+      super.isFetchingPlanetAndSpecie = value;
+    });
+  }
+
   final _$specieAtom = Atom(name: '_DetailsPagePresenterBase.specie');
 
   @override
@@ -106,8 +123,21 @@ mixin _$DetailsPagePresenter on _DetailsPagePresenterBase, Store {
   }
 
   @override
+  dynamic _setIsFetchingPlanetAndSpecie(bool v) {
+    final _$actionInfo =
+        _$_DetailsPagePresenterBaseActionController.startAction(
+            name: '_DetailsPagePresenterBase._setIsFetchingPlanetAndSpecie');
+    try {
+      return super._setIsFetchingPlanetAndSpecie(v);
+    } finally {
+      _$_DetailsPagePresenterBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+isFetchingPlanetAndSpecie: ${isFetchingPlanetAndSpecie},
 specie: ${specie},
 planet: ${planet},
 x: ${x},

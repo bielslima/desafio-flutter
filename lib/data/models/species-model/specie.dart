@@ -3,24 +3,37 @@ import 'package:json_annotation/json_annotation.dart';
 part 'specie.g.dart';
 
 @JsonSerializable(
-  anyMap: true,
-  fieldRename: FieldRename.snake,
-)
+    anyMap: true, fieldRename: FieldRename.snake, includeIfNull: true)
 class Specie {
+  @JsonKey(defaultValue: '')
   String name;
+  @JsonKey(defaultValue: '')
   String classification;
+  @JsonKey(defaultValue: '')
   String designation;
+  @JsonKey(defaultValue: '')
   String averageHeight;
+  @JsonKey(defaultValue: '')
   String skinColors;
+  @JsonKey(defaultValue: '')
   String hairColors;
+  @JsonKey(defaultValue: '')
   String eyeColors;
+  @JsonKey(defaultValue: '')
   String averageLifespan;
+  @JsonKey(defaultValue: '')
   String homeworld;
+  @JsonKey(defaultValue: '')
   String language;
+  @JsonKey(defaultValue: [])
   List<String> people;
+  @JsonKey(defaultValue: [])
   List<String> films;
+  @JsonKey(defaultValue: '')
   String created;
+  @JsonKey(defaultValue: '')
   String edited;
+  @JsonKey(defaultValue: '')
   String url;
 
   Specie(
