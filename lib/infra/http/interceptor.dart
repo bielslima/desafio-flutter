@@ -15,6 +15,8 @@ class HttpInterceptors extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    print(options.path);
+    print(options.queryParameters);
     if (options.path.contains('starwarsfavorites')) {
       Box box = await Hive.openBox(InfraConstants.HIVE_BOX_MAIN);
 

@@ -1,5 +1,5 @@
 class InfraConstants {
-  static const BASE_URL_SWAPI = "https://swapi.dev";
+  static const BASE_URL_SWAPI = "http://swapi.dev";
   static const BASE_URL_STARWARSFAVORITES =
       "http://private-782d3-starwarsfavorites.apiary-mock.com";
 

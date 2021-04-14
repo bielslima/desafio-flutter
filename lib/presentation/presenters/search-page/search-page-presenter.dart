@@ -31,10 +31,9 @@ abstract class _SearchPagePresenterBase
     try {
       await SearchPeoplesRemote.execute(inputExpression).then((qryPeoples) {
         this.setPeoples(qryPeoples.results);
-        print('Encontrado ${qryPeoples.results.length} resultados.');
       });
     } catch (e) {
-      NotificationService.showToastError('Falha ao buscar pessoas: $e');
+      NotificationService.showToastError(e.toString());
     } finally {
       this.setIsSearchingPeoples(false);
     }

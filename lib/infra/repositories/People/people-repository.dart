@@ -9,7 +9,7 @@ import '../../constants.dart';
 
 abstract class IPeopleRepository {
   Future findPeopleRemote(String idPeople);
-  Future findPeoplesRemote({String? path, int? page});
+  Future findPeoplesRemote({String? path, int page});
 }
 
 @injectable
@@ -19,7 +19,13 @@ class PeopleRepository implements IPeopleRepository {
         .findAll(boxName: InfraConstants.HIVE_BOX_PEOPLE);
   }
 
-  Future<Response> findPeoplesRemote({String? path, int? page}) async {
+  Future<Response> findAllPeoplesWithUrlRemote(String url) async {
+    return getIt<HttpClient>().httpGet(
+      url,
+    );
+  }
+
+  Future<Response> findPeoplesRemote({String? path, int page = 1}) async {
     return getIt<HttpClient>().httpGet(
       path ?? InfraConstants.BASE_URL_SWAPI + InfraConstants.ENDPOINT_PEOPLES,
       queryParameters: {
