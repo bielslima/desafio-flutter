@@ -13,7 +13,8 @@ abstract class IPeopleRepository {
 @injectable
 class PeopleRepository implements IPeopleRepository {
   Future<dynamic> findPeoplesLocal(int page) async {
-    return getIt<LocalStorage>().findAll(boxName: InfraConstants.BOX_PEOPLE);
+    return getIt<LocalStorage>()
+        .findAll(boxName: InfraConstants.HIVE_BOX_PEOPLE);
   }
 
   Future<dynamic> findPeoplesRemote({String? path, int? page}) async {

@@ -8,7 +8,7 @@ part of 'people.dart';
 
 class PeopleAdapter extends TypeAdapter<People> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
   People read(BinaryReader reader) {
@@ -27,13 +27,16 @@ class PeopleAdapter extends TypeAdapter<People> {
       fields[7] as String,
       (fields[8] as List).cast<String>(),
       fields[9] as String,
+      fields[10] as String,
+      fields[11] as String,
+      fields[12] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, People obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -53,7 +56,13 @@ class PeopleAdapter extends TypeAdapter<People> {
       ..writeByte(8)
       ..write(obj.species)
       ..writeByte(9)
-      ..write(obj.homeworld);
+      ..write(obj.homeworld)
+      ..writeByte(10)
+      ..write(obj.created)
+      ..writeByte(11)
+      ..write(obj.edited)
+      ..writeByte(12)
+      ..write(obj.url);
   }
 
   @override
@@ -83,6 +92,9 @@ People _$PeopleFromJson(Map json) {
     json['gender'] as String,
     (json['species'] as List<dynamic>).map((e) => e as String).toList(),
     json['homeworld'] as String,
+    json['created'] as String,
+    json['edited'] as String,
+    json['url'] as String,
   );
 }
 
@@ -97,4 +109,7 @@ Map<String, dynamic> _$PeopleToJson(People instance) => <String, dynamic>{
       'gender': instance.gender,
       'species': instance.species,
       'homeworld': instance.homeworld,
+      'created': instance.created,
+      'edited': instance.edited,
+      'url': instance.url,
     };

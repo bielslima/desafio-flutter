@@ -18,4 +18,9 @@ abstract class LocalStorage {
     required String boxName,
     required Map<dynamic, dynamic> data,
   });
+
+  Future<void> delete({
+    required String boxName,
+    required String key,
+  });
 }

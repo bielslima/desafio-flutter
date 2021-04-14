@@ -13,6 +13,7 @@ import './infra/dependency-injection/injectable.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initHiveDatabase();
   await di.init();
   runApp(App());
 }

@@ -1,10 +1,38 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 import 'package:popcode_challenge_swapi/ui/pages/home/components/feature.dart';
 
-class PeopleWidget extends StatelessWidget {
+class PeopleWidget extends StatefulWidget {
   People people;
   PeopleWidget(this.people);
+
+  @override
+  _PeopleWidgetState createState() => _PeopleWidgetState();
+}
+
+class _PeopleWidgetState extends State<PeopleWidget> with AfterLayoutMixin {
+  late bool isFavorite;
+  bool loadingFavorite = true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void afterFirstLayout(BuildContext c) async {
+    this.isFavorite = await widget.people.isFavorite;
+    setState(() {
+      this.loadingFavorite = false;
+    });
+  }
+
+  void toggleFavorite() async {
+    setState(() => this.loadingFavorite = true);
+    this.isFavorite = await widget.people.toggleFavorite(this.isFavorite);
+    setState(() => this.loadingFavorite = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +52,7 @@ class PeopleWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  people.name,
+                  widget.people.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context)
@@ -33,12 +61,16 @@ class PeopleWidget extends StatelessWidget {
                       ?.copyWith(color: Colors.black),
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.star_border),
-                onPressed: () {
-                  print("set favorite");
-                },
-              ),
+              this.loadingFavorite
+                  ? CircularProgressIndicator()
+                  : IconButton(
+                      icon: Icon(
+                        this.isFavorite
+                            ? Icons.star_rate_rounded
+                            : Icons.star_outline_rounded,
+                      ),
+                      onPressed: toggleFavorite,
+                    ),
             ],
           ),
           Container(
@@ -48,7 +80,7 @@ class PeopleWidget extends StatelessWidget {
               children: [
                 FeatureWidget(
                   'Gender',
-                  people.gender,
+                  widget.people.gender,
                   valueStyle: Theme.of(context)
                       .textTheme
                       .subtitle2
@@ -57,7 +89,7 @@ class PeopleWidget extends StatelessWidget {
                 ),
                 FeatureWidget(
                   'Height',
-                  people.height,
+                  widget.people.height,
                   valueStyle: Theme.of(context)
                       .textTheme
                       .subtitle2
@@ -66,7 +98,7 @@ class PeopleWidget extends StatelessWidget {
                 ),
                 FeatureWidget(
                   'Mass',
-                  people.mass,
+                  widget.people.mass,
                   valueStyle: Theme.of(context)
                       .textTheme
                       .subtitle2

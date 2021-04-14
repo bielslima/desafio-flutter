@@ -62,7 +62,7 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
 
       this.qryPeoples = _qryPeoples;
     } catch (e) {
-      NotificationService.showToastError('Falha ao buscar mais resultados: $e');
+      NotificationService.showToastError('Failed to fetch more results: $e');
     } finally {
       _setLoadingMorePeoples(false);
     }
@@ -84,13 +84,6 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
       RouterPaths.SEARCH,
       transitionType: TransitionType.fadeIn,
     );
-  }
-
-  void init() {
-    this.scrollController.addListener(() {
-      if (this.scrollController.position.pixels >=
-          (this.scrollController.position.maxScrollExtent * .8)) {}
-    });
   }
 
   void dispose() {

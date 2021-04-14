@@ -3,12 +3,13 @@ import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
 
 import '../../data/http/http.dart';
+import 'interceptor.dart';
 
 @Injectable(
   as: HttpClient,
 )
 class HttpImpl implements HttpClient {
-  final Dio dio = Dio();
+  final Dio dio = Dio()..interceptors.add(HttpInterceptors());
 
   _makeOptions(Map<String, String> headers, Map<String, dynamic> queryParams) {
     this.dio.options = BaseOptions(
@@ -18,7 +19,7 @@ class HttpImpl implements HttpClient {
   }
 
   Map<String, String> _makeHeaders(Map<String, String> headers) {
-    late final Map<String, String> _headers = headers
+    final Map<String, String> _headers = headers
       ..addAll(
         {
           'content-type': 'application/json',
@@ -35,8 +36,6 @@ class HttpImpl implements HttpClient {
     Map<String, String>? headers,
   }) async {
     try {
-      print("[GET] => $path");
-
       this._makeOptions(headers ?? {}, queryParameters ?? {});
 
       Response res = await dio.get(path);
@@ -48,7 +47,6 @@ class HttpImpl implements HttpClient {
       else
         throw 'Request status code: ${res.statusCode}';
     } catch (e) {
-      print(e);
       rethrow;
     }
   }
@@ -70,7 +68,7 @@ class HttpImpl implements HttpClient {
       // print("RES => ${res.statusCode}");
       // return jsonDecode(res.data);
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 

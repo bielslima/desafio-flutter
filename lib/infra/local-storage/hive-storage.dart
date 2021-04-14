@@ -43,4 +43,14 @@ class LocalStorageImpl implements LocalStorage {
 
     return box.putAll(data);
   }
+
+  @override
+  Future<dynamic> delete({
+    required String boxName,
+    required String key,
+  }) async {
+    Box box = await Hive.openBox(boxName);
+
+    return box.delete(key);
+  }
 }
