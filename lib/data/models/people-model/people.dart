@@ -52,6 +52,9 @@ class People extends HiveObject {
   @HiveField(12)
   final String url;
 
+  @JsonKey(defaultValue: false)
+  bool isFavorite = false;
+
   People(
     this.name,
     this.height,
@@ -76,14 +79,11 @@ class People extends HiveObject {
     return this.url.replaceAll(new RegExp('([A-Za-z\/.:])'), '');
   }
 
-  Future<bool> get isFavorite async {
-    return VerifyPeopleFavorite.execute(this.id);
-  }
-
   Future<bool> toggleFavorite(bool isFavorite) async {
     isFavorite
         ? await RemovePeopleFavorite.execute(this.id)
         : await SetPeopleFavoriteLocal.execute(this.id);
-    return !isFavorite;
+    this.isFavorite = !isFavorite;
+    return this.isFavorite;
   }
 }

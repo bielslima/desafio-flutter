@@ -25,10 +25,26 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
   late ScrollController scrollController;
 
   @observable
+  bool showOnlyFavorites = false;
+
+  @observable
   ObservableList<People> peoples = new ObservableList();
 
   @observable
+  ObservableList<People> peoplesFavorites = new ObservableList();
+
+  @observable
   bool isLoadingMorePeoples = false;
+
+  @action
+  void setShowOnlyFavorites(bool v) {
+    print('new value $v');
+    if (v) {
+      this.peoplesFavorites =
+          ObservableList.of(this.peoples.where((e) => e.isFavorite).toList());
+    }
+    this.showOnlyFavorites = v;
+  }
 
   @action
   void _addPeoples(Iterable<People> elements) {
@@ -74,8 +90,6 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
     }
   }
 
-  Future toggleFavorite() async {}
-
   void showDetails(BuildContext context, int indexPeople) {
     appControl.navigateTo(
       context,
@@ -103,4 +117,15 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
       this.loadingMorePeoples();
     }
   }
+
+  // Future<ObservableList<People>> peoplesOnlyFavoritesFilter() async {
+  //   List<People> lst = [];
+
+  //   for (People p in peoples) {
+  //     if (await p.isFavorite) {
+  //       lst.add(p);
+  //     }
+  //   }
+  //   return ObservableList.of(lst);
+  // }
 }

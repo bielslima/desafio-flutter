@@ -28,8 +28,6 @@ class _DetailsPageState extends State<DetailsPage>
   void initState() {
     super.initState();
     this._people = this._homePagePresenter.peoples[widget.indexPeople];
-    // _presenter.findHomeWorld(this._people.homeworld);
-    // _presenter.findSpecies(this._people.species);
     _presenter.findHomeWorldAndSpecies(
         this._people.homeworld, this._people.species);
   }

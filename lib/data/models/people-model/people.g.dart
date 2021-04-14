@@ -95,7 +95,7 @@ People _$PeopleFromJson(Map json) {
     json['created'] as String,
     json['edited'] as String,
     json['url'] as String,
-  );
+  )..isFavorite = json['is_favorite'] as bool? ?? false;
 }
 
 Map<String, dynamic> _$PeopleToJson(People instance) => <String, dynamic>{
@@ -112,4 +112,5 @@ Map<String, dynamic> _$PeopleToJson(People instance) => <String, dynamic>{
       'created': instance.created,
       'edited': instance.edited,
       'url': instance.url,
+      'is_favorite': instance.isFavorite,
     };

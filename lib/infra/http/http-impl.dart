@@ -42,15 +42,7 @@ class HttpImpl implements HttpClient {
     try {
       this._makeOptions(headers ?? {}, queryParameters ?? {});
 
-      Response res = await dio.get(path);
-
-      print("RES => ${res.statusCode}");
-
-      if (res.statusCode == 200 || res.statusCode == 201)
-        return res.data;
-      else
-        throw res.data['error_message'] ??
-            'Internal error API, (${res.statusCode ?? 'Unknown'})';
+      return dio.get(path);
     } catch (e) {
       rethrow;
     }

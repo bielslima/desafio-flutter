@@ -59,12 +59,4 @@ abstract class _DetailsPagePresenterBase
       if (result[1].length != 0) this._setSpecie(result[1][0]);
     });
   }
-
-  // void findHomeWorld(String endpoint) {
-  //   FindPlanetRemote.execute(endpoint).then(_setPlanet);
-  // }
-
-  // void findSpecies(List<String> endpoints) {
-  //   FindSpeciesRemote.execute(endpoints).then(print);
-  // }
 }

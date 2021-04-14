@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:popcode_challenge_swapi/data/http/http-client.dart';
 import 'package:popcode_challenge_swapi/data/local-storage/local-storage.dart';
@@ -18,7 +19,7 @@ class PeopleRepository implements IPeopleRepository {
         .findAll(boxName: InfraConstants.HIVE_BOX_PEOPLE);
   }
 
-  Future<dynamic> findPeoplesRemote({String? path, int? page}) async {
+  Future<Response> findPeoplesRemote({String? path, int? page}) async {
     return getIt<HttpClient>().httpGet(
       path ?? InfraConstants.BASE_URL_SWAPI + InfraConstants.ENDPOINT_PEOPLES,
       queryParameters: {

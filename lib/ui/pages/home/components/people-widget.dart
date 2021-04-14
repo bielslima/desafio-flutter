@@ -4,7 +4,7 @@ import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 import 'package:popcode_challenge_swapi/ui/pages/home/components/feature.dart';
 
 class PeopleWidget extends StatefulWidget {
-  People people;
+  final People people;
   PeopleWidget(this.people);
 
   @override
@@ -12,8 +12,7 @@ class PeopleWidget extends StatefulWidget {
 }
 
 class _PeopleWidgetState extends State<PeopleWidget> with AfterLayoutMixin {
-  late bool isFavorite;
-  bool loadingFavorite = true;
+  bool loadingFavorite = false;
 
   @override
   void initState() {
@@ -21,15 +20,16 @@ class _PeopleWidgetState extends State<PeopleWidget> with AfterLayoutMixin {
   }
 
   void afterFirstLayout(BuildContext c) async {
-    this.isFavorite = await widget.people.isFavorite;
-    setState(() {
-      this.loadingFavorite = false;
-    });
+    // this.isFavorite = await widget.people.isFavorite;
+    // setState(() {
+    //   this.loadingFavorite = false;
+    // });
   }
 
   void toggleFavorite() async {
     setState(() => this.loadingFavorite = true);
-    this.isFavorite = await widget.people.toggleFavorite(this.isFavorite);
+    widget.people.isFavorite =
+        await widget.people.toggleFavorite(widget.people.isFavorite);
     setState(() => this.loadingFavorite = false);
   }
 
@@ -65,7 +65,7 @@ class _PeopleWidgetState extends State<PeopleWidget> with AfterLayoutMixin {
                   ? CircularProgressIndicator()
                   : IconButton(
                       icon: Icon(
-                        this.isFavorite
+                        widget.people.isFavorite
                             ? Icons.star_rate_rounded
                             : Icons.star_outline_rounded,
                       ),

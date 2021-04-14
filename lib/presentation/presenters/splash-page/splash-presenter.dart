@@ -12,6 +12,7 @@ import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.da
 import 'package:popcode_challenge_swapi/infra/utils/NetworkStatus.dart';
 import 'package:popcode_challenge_swapi/presentation/presenters/home-page/home-page-presenter.dart';
 import 'package:popcode_challenge_swapi/ui/pages/splash/splash-page-presenter.dart';
+import 'package:popcode_challenge_swapi/ui/utils/notification-service.dart';
 
 part 'splash-presenter.g.dart';
 
@@ -29,14 +30,12 @@ abstract class _SplashPresenterBase with Store implements ISplashPagePresenter {
       // appStore.isConnected = false;
       print('App connected: ${appStore.isConnected}');
       if (appStore.isConnected) {
-        await this.sendQueueFavorites();
+        await SendQueueFavorites.execute();
       }
       await this.findPeoples();
-    } catch (e) {}
-  }
-
-  Future sendQueueFavorites() async {
-    await SendQueueFavorites.execute();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future findPeoples() async {
@@ -49,7 +48,7 @@ abstract class _SplashPresenterBase with Store implements ISplashPagePresenter {
         homePresenter.setPeoples(peoples);
       }
     } catch (e) {
-      print(e);
+      NotificationService.showToastError(e.toString());
       rethrow;
     }
   }

@@ -13,14 +13,14 @@ class SetPeopleFavoriteRemote {
 
       if (response.statusCode == 201) {
         NotificationService.showToastSuccess(response.data['message']);
+        return true;
       } else if (response.statusCode == 400) {
         NotificationService.showToastError(response.data['error_message']);
-        throw response.data['error_message'];
       } else {
         NotificationService.showToastError(
             'Failed to favor the person: Unknown error.');
-        throw 'Failed to favor the person: Unknown error.';
       }
+      return false;
     } catch (e) {
       throw e;
     }

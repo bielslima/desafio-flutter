@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 import 'package:popcode_challenge_swapi/infra/routes/routes.dart';
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               ),
               action: IconButton(
                 icon: Icon(Icons.filter_list),
-                onPressed: () => this.presenter.btnSearchPeople(context),
+                onPressed: () => this._showFilters(context),
               ),
             ),
             Expanded(
@@ -66,26 +67,43 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _showFilters(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => BottomSheetFilter(),
+    );
+  }
+
   Widget _buildListView() {
     return Observer(
       builder: (_) => ListView.separated(
         controller: this._scrollController,
         itemBuilder: (context, i) {
-          if (i == this.presenter.peoples.length) {
+          final List<People> peoples = this.presenter.showOnlyFavorites
+              ? presenter.peoplesFavorites
+              : presenter.peoples;
+          if (i == peoples.length) {
             return Center(
-                child: Observer(
-              builder: (_) => this.presenter.isLoadingMorePeoples
-                  ? CircularProgressIndicator()
-                  : Container(),
-            ));
+              child: Observer(
+                builder: (_) => this.presenter.isLoadingMorePeoples
+                    ? CircularProgressIndicator()
+                    : Container(),
+              ),
+            );
           } else {
+            People people = peoples[i];
+            //     ? presenter.peoplesFavorites[i]
+            //     : ;
             return InkWell(
-              child: PeopleWidget(presenter.peoples[i]),
+              child: PeopleWidget(people),
               onTap: () => this.presenter.showDetails(context, i),
             );
           }
         },
-        itemCount: presenter.peoples.length + 1,
+        itemCount: this.presenter.showOnlyFavorites
+            ? presenter.peoplesFavorites.length
+            : presenter.peoples.length + 1,
+        // this.presenter.peoples.length + 1,
         separatorBuilder: (_, i) => SizedBox(
           height: 10,
         ),
