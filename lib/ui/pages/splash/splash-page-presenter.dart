@@ -1,4 +1,5 @@
 abstract class ISplashPagePresenter {
-  Future<dynamic> updateLocalData();
-  Future<dynamic> findPeoples();
+  Future init();
+  Future sendQueueFavorites();
+  Future findPeoples();
 }

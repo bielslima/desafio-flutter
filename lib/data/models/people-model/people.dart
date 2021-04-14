@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/remove-people-favorite/remove-people-favorite.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/set-people-favorite/set-people-favorite.dart';
+import 'package:popcode_challenge_swapi/domain/usecases/set-people-favorite-local/set-people-favorite-local.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/verify-people-favorite/verify-people-favorite.dart';
 
 part 'people.g.dart';
@@ -83,7 +83,7 @@ class People extends HiveObject {
   Future<bool> toggleFavorite(bool isFavorite) async {
     isFavorite
         ? await RemovePeopleFavorite.execute(this.id)
-        : await SetPeopleFavorite.execute(this.id);
+        : await SetPeopleFavoriteLocal.execute(this.id);
     return !isFavorite;
   }
 }

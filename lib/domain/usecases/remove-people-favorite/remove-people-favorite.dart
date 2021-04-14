@@ -11,6 +11,11 @@ class RemovePeopleFavorite {
         boxName: InfraConstants.HIVE_BOX_FAVORITES,
         key: idPeople,
       );
+
+      await localStorage.delete(
+        boxName: InfraConstants.HIVE_BOX_QUEUEFAVORITES,
+        key: idPeople,
+      );
     } catch (e) {
       rethrow;
     }

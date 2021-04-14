@@ -45,3 +45,12 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Hive storage
+main.hive
+main.lock
+favorites.hive
+favorites.lock
+people.hive
+people.lock
+queue_favorites.hive
+queue_favorites.lock

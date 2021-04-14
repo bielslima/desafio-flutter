@@ -15,12 +15,12 @@ class LocalStorageImpl implements LocalStorage {
   }
 
   @override
-  Future<List<dynamic>> findAll({
+  Future<Iterable<T>> findAll<T>({
     required String boxName,
   }) async {
-    Box box = await Hive.openBox(boxName);
+    Box<T> box = await Hive.openBox<T>(boxName);
 
-    return box.values.toList();
+    return box.values;
   }
 
   @override
@@ -29,6 +29,8 @@ class LocalStorageImpl implements LocalStorage {
     required String key,
     required dynamic data,
   }) async {
+    print('Writing $boxName => $key');
+
     Box box = await Hive.openBox(boxName);
 
     return box.put(key, data);

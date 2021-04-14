@@ -1,12 +1,14 @@
+import 'package:dio/dio.dart';
+
 abstract class HttpClient {
-  Future<dynamic> httpGet(
+  Future<Response> httpGet(
     String path, {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   });
 
-  Future<dynamic> httpPost(
+  Future<Response> httpPost(
     String path, {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,

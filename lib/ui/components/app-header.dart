@@ -5,12 +5,14 @@ class AppHeader extends StatelessWidget {
   final bool centerTitle;
   final bool backButton;
   final Widget? title;
+  final Widget? searchIcon;
   final Widget? action;
 
   AppHeader({
     this.title,
     this.centerTitle = false,
     this.backButton = false,
+    this.searchIcon,
     this.action,
   });
   @override
@@ -31,6 +33,7 @@ class AppHeader extends StatelessWidget {
           title ?? Container(),
           Spacer(),
           this.action ?? Container(),
+          this.searchIcon ?? Container(),
         ],
       ),
     );

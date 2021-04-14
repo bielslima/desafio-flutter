@@ -5,9 +5,11 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:popcode_challenge_swapi/data/models/queue-favorite-request/queue-favorite-request.dart';
 import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/ui/components/theme-app.dart';
 
+import './data/models/models.dart';
 import './infra/routes/routes.dart';
 import './infra/dependency-injection/injectable.dart' as di;
 
@@ -21,6 +23,12 @@ void main() async {
 void initHiveDatabase() {
   var path = Directory.current.path;
   Hive.init(path);
+  registerHiveAdapters();
+}
+
+void registerHiveAdapters() {
+  Hive.registerAdapter(PeopleAdapter());
+  Hive.registerAdapter(QueueFavoriteRequestAdapter());
 }
 
 class App extends StatelessWidget {

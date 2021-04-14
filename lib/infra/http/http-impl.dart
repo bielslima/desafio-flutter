@@ -15,6 +15,10 @@ class HttpImpl implements HttpClient {
     this.dio.options = BaseOptions(
       headers: _makeHeaders(headers),
       queryParameters: queryParams,
+      validateStatus: (status) {
+        if (status != null) return status < 500;
+        return false;
+      },
     );
   }
 
@@ -29,7 +33,7 @@ class HttpImpl implements HttpClient {
     return _headers;
   }
 
-  Future<dynamic> httpGet(
+  Future<Response> httpGet(
     String path, {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
@@ -42,31 +46,29 @@ class HttpImpl implements HttpClient {
 
       print("RES => ${res.statusCode}");
 
-      if (res.statusCode == 200)
+      if (res.statusCode == 200 || res.statusCode == 201)
         return res.data;
       else
-        throw 'Request status code: ${res.statusCode}';
+        throw res.data['error_message'] ??
+            'Internal error API, (${res.statusCode ?? 'Unknown'})';
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> httpPost(
+  Future<Response> httpPost(
     String path, {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
     try {
-      // print("[POST] => ${InfraConstants.BASE_URL_SWAPI}/$path");
-      return {};
-      // Response res = await Dio().post(
-      //   Uri.https(InfraConstants.BASE_URL_SWAPI, path, queryParameters),
-      //   body: body,
-      //   headers: this._makeHeaders(headers ?? {}),
-      // );
-      // print("RES => ${res.statusCode}");
-      // return jsonDecode(res.data);
+      this._makeOptions(headers ?? {}, queryParameters ?? {});
+
+      return dio.post(
+        path,
+        data: body ?? {},
+      );
     } catch (e) {
       rethrow;
     }

@@ -45,8 +45,12 @@ class _HomePageState extends State<HomePage> {
           children: [
             AppHeader(
               title: Logo(),
-              action: IconButton(
+              searchIcon: IconButton(
                 icon: Icon(Icons.search),
+                onPressed: () => this.presenter.btnSearchPeople(context),
+              ),
+              action: IconButton(
+                icon: Icon(Icons.filter_list),
                 onPressed: () => this.presenter.btnSearchPeople(context),
               ),
             ),

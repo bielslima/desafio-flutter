@@ -4,7 +4,7 @@ abstract class LocalStorage {
     required String key,
   });
 
-  Future<List<dynamic>> findAll({
+  Future<Iterable<T>> findAll<T>({
     required String boxName,
   });
 

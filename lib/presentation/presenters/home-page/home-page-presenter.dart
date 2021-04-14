@@ -46,7 +46,13 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
     this._setPeoples(this.qryPeoples.results);
   }
 
+  void setPeoples(List<People> peoples) {
+    this._setPeoples(List.of(peoples));
+  }
+
   void loadingMorePeoples() async {
+    if (!this.appControl.isConnected) return;
+
     _setLoadingMorePeoples(true);
     try {
       if (this.qryPeoples.next == '') return;
