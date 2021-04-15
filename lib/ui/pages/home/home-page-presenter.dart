@@ -2,5 +2,5 @@ import 'package:popcode_challenge_swapi/data/models/query-peoples-model/query-pe
 
 abstract class IHomePagePresenter {
   void setQueryPeoples(QueryPeoples _qry);
-  void loadingMorePeoples();
+  void loadingAllPeoples();
 }

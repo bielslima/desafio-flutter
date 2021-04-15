@@ -21,14 +21,12 @@ class SavePeoplesLocalStorage {
 
           if (currentRemoteDateEdited.microsecondsSinceEpoch >
               currentLocalDateEdited.microsecondsSinceEpoch) {
-            print("Updating register");
             await localStorage.write(
               boxName: InfraConstants.HIVE_BOX_PEOPLE,
               key: peopleRemote.id,
               data: peopleRemote,
             );
           }
-          print("Register updated");
         } else {
           await localStorage.write(
             boxName: InfraConstants.HIVE_BOX_PEOPLE,
@@ -36,6 +34,8 @@ class SavePeoplesLocalStorage {
             data: peopleRemote,
           );
         }
+
+        print("Writing ${peopleRemote.name}");
       }
     } catch (e) {
       throw e;

@@ -8,6 +8,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:popcode_challenge_swapi/data/models/queue-favorite-request/queue-favorite-request.dart';
 import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/ui/components/theme-app.dart';
+import 'package:path_provider/path_provider.dart';
 
 import './data/models/models.dart';
 import './infra/routes/routes.dart';
@@ -15,14 +16,14 @@ import './infra/dependency-injection/injectable.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initHiveDatabase();
+  await initHiveDatabase();
   await di.init();
   runApp(App());
 }
 
-void initHiveDatabase() {
-  var path = Directory.current.path;
-  Hive.init(path);
+Future<void> initHiveDatabase() async {
+  Directory directory = await getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
   registerHiveAdapters();
 }
 

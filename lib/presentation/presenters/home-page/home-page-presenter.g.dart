@@ -77,6 +77,17 @@ mixin _$HomePagePresenter on _HomePagePresenterBase, Store {
       ActionController(name: '_HomePagePresenterBase');
 
   @override
+  void setValueFavoriteToPeople(int index, bool v) {
+    final _$actionInfo = _$_HomePagePresenterBaseActionController.startAction(
+        name: '_HomePagePresenterBase.setValueFavoriteToPeople');
+    try {
+      return super.setValueFavoriteToPeople(index, v);
+    } finally {
+      _$_HomePagePresenterBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setShowOnlyFavorites(bool v) {
     final _$actionInfo = _$_HomePagePresenterBaseActionController.startAction(
         name: '_HomePagePresenterBase.setShowOnlyFavorites');
@@ -88,7 +99,7 @@ mixin _$HomePagePresenter on _HomePagePresenterBase, Store {
   }
 
   @override
-  void _addPeoples(Iterable<People> elements) {
+  void _addPeoples(Iterable<People>? elements) {
     final _$actionInfo = _$_HomePagePresenterBaseActionController.startAction(
         name: '_HomePagePresenterBase._addPeoples');
     try {
@@ -99,7 +110,7 @@ mixin _$HomePagePresenter on _HomePagePresenterBase, Store {
   }
 
   @override
-  void _setPeoples(List<People> _peoples) {
+  void _setPeoples(List<People>? _peoples) {
     final _$actionInfo = _$_HomePagePresenterBaseActionController.startAction(
         name: '_HomePagePresenterBase._setPeoples');
     try {

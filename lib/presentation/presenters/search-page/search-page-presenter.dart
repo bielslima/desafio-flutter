@@ -1,6 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/search-peoples-remote/search-peoples-remote.dart';
+import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
+import 'package:popcode_challenge_swapi/presentation/presenters/home-page/home-page-presenter.dart';
 import 'package:popcode_challenge_swapi/ui/pages/search/search-page-presenter.dart';
 import 'package:popcode_challenge_swapi/ui/utils/notification-service.dart';
 import 'package:injectable/injectable.dart';
@@ -12,6 +14,8 @@ class SearchPagePresenter = _SearchPagePresenterBase with _$SearchPagePresenter;
 abstract class _SearchPagePresenterBase
     with Store
     implements ISearchPagePresenter {
+  HomePagePresenter _homePresenter = getIt<HomePagePresenter>();
+
   @observable
   List<People> peoplesSrc = [];
 

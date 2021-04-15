@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:popcode_challenge_swapi/data/local-storage/local-storage.dart';
+import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 
 @Injectable(as: LocalStorage)
 class LocalStorageImpl implements LocalStorage {
@@ -30,7 +31,6 @@ class LocalStorageImpl implements LocalStorage {
     required dynamic data,
   }) async {
     print('Writing $boxName => $key');
-
     Box box = await Hive.openBox(boxName);
 
     return box.put(key, data);

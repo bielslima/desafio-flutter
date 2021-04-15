@@ -4,10 +4,9 @@ import 'package:mobx/mobx.dart';
 import 'package:injectable/injectable.dart';
 import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 import 'package:popcode_challenge_swapi/data/models/query-peoples-model/query-peoples.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/find-peoples-remote/find-peoples-remote.dart';
+import 'package:popcode_challenge_swapi/domain/usecases/find-peoples-url/find-peoples-url.dart';
 import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
-import 'package:popcode_challenge_swapi/infra/routes/routes.dart';
 
 import 'package:popcode_challenge_swapi/ui/pages/home/home-page-presenter.dart';
 import 'package:popcode_challenge_swapi/ui/utils/notification-service.dart';
@@ -21,8 +20,7 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
   final ApplicationStore appControl = getIt<ApplicationStore>();
   int currentPageList = 1;
 
-  late QueryPeoples qryPeoples;
-  late ScrollController scrollController;
+  QueryPeoples? qryPeoples;
 
   @observable
   bool showOnlyFavorites = false;
@@ -37,8 +35,12 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
   bool isLoadingMorePeoples = false;
 
   @action
+  void setValueFavoriteToPeople(int index, bool v) {
+    this.peoples[index].isFavorite = v;
+  }
+
+  @action
   void setShowOnlyFavorites(bool v) {
-    print('new value $v');
     if (v) {
       this.peoplesFavorites =
           ObservableList.of(this.peoples.where((e) => e.isFavorite).toList());
@@ -47,85 +49,37 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
   }
 
   @action
-  void _addPeoples(Iterable<People> elements) {
-    this.peoples.addAll(elements);
+  void _addPeoples(Iterable<People>? elements) {
+    this.peoples.addAll(elements ?? []);
   }
 
   @action
-  void _setPeoples(List<People> _peoples) => this.peoples.addAll(_peoples);
+  void _setPeoples(List<People>? _peoples) =>
+      this.peoples.addAll(_peoples ?? []);
 
   @action
   void _setLoadingMorePeoples(bool v) => this.isLoadingMorePeoples = v;
 
   void setQueryPeoples(QueryPeoples _qry) {
     this.qryPeoples = _qry;
-    this._setPeoples(this.qryPeoples.results);
+    this._setPeoples(this.qryPeoples?.results);
   }
 
-  void setPeoples(List<People> peoples) {
-    this._setPeoples(List.of(peoples));
-  }
+  void setPeoples(List<People> peoples) => this._setPeoples(List.of(peoples));
 
-  void loadingMorePeoples() async {
-    if (!this.appControl.isConnected) return;
-
+  void loadingAllPeoples() async {
+    if (this.qryPeoples == null) return;
     _setLoadingMorePeoples(true);
     try {
-      if (this.qryPeoples.next == '') return;
-
-      print('Find more data ?page=${this.currentPageList + 1}');
-
-      QueryPeoples _qryPeoples =
-          await FindPeoplesRemote.execute(page: this.currentPageList + 1);
-
-      this.currentPageList++;
-
-      this._addPeoples(_qryPeoples.results);
-
-      this.qryPeoples = _qryPeoples;
+      while (this.qryPeoples?.next != '') {
+        this.qryPeoples = await FindPeoplesUrl.execute(this.qryPeoples?.next);
+        this._addPeoples(qryPeoples?.results);
+      }
+      print('${this.peoples.length} Peoples.');
     } catch (e) {
       NotificationService.showToastError('Failed to fetch more results: $e');
     } finally {
       _setLoadingMorePeoples(false);
     }
   }
-
-  void showDetails(BuildContext context, int indexPeople) {
-    appControl.navigateTo(
-      context,
-      RouterPaths.DETAILS.replaceAll(':id', indexPeople.toString()),
-      transitionType: TransitionType.fadeIn,
-    );
-  }
-
-  void btnSearchPeople(BuildContext context) {
-    appControl.navigateTo(
-      context,
-      RouterPaths.SEARCH,
-      transitionType: TransitionType.fadeIn,
-    );
-  }
-
-  void dispose() {
-    this.scrollController.dispose();
-  }
-
-  void listenerScroll(ScrollController scrollController) {
-    if (this.isLoadingMorePeoples) return;
-    if (scrollController.position.pixels >=
-        (scrollController.position.maxScrollExtent * .8)) {
-      this.loadingMorePeoples();
-    }
-  }
-
-  // Future<ObservableList<People>> peoplesOnlyFavoritesFilter() async {
-  //   List<People> lst = [];
-
-  //   for (People p in peoples) {
-  //     if (await p.isFavorite) {
-  //       lst.add(p);
-  //     }
-  //   }
-  //   return ObservableList.of(lst);
-  // }
 }

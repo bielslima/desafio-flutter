@@ -31,11 +31,7 @@ class _SplashPageState extends State<SplashPage> {
             clearStack: true,
           ),
         )
-        .onError((error, stackTrace) {
-      // NotificationService.showToastError(
-      //     'Failed to fetch data: ${error.toString()}');
-      // print(stackTrace);
-    });
+        .onError((error, stackTrace) {});
   }
 
   @override

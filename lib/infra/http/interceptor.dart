@@ -15,6 +15,7 @@ class HttpInterceptors extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    print(options.method);
     print(options.path);
     print(options.queryParameters);
     if (options.path.contains('starwarsfavorites')) {

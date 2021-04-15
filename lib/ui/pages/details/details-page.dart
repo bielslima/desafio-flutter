@@ -23,11 +23,13 @@ class _DetailsPageState extends State<DetailsPage>
   final Duration durationAnimation = Duration(milliseconds: 300);
 
   late final People _people;
+  late bool loadingFavorite = false;
 
   @override
   void initState() {
     super.initState();
-    this._people = this._homePagePresenter.peoples[widget.indexPeople];
+    this._people =
+        this._homePagePresenter.peoples.elementAt(widget.indexPeople);
     _presenter.findHomeWorldAndSpecies(
         this._people.homeworld, this._people.species);
   }
@@ -37,6 +39,14 @@ class _DetailsPageState extends State<DetailsPage>
     _presenter.initAnimation();
   }
 
+  void toggleFavorite() async {
+    setState(() => this.loadingFavorite = true);
+    _people.isFavorite = await _people.toggleFavorite(_people.isFavorite);
+    _homePagePresenter.setValueFavoriteToPeople(
+        widget.indexPeople, _people.isFavorite);
+    setState(() => this.loadingFavorite = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +54,16 @@ class _DetailsPageState extends State<DetailsPage>
         children: [
           AppHeader(
             backButton: true,
+            action: this.loadingFavorite
+                ? CircularProgressIndicator()
+                : IconButton(
+                    icon: Icon(
+                      _people.isFavorite
+                          ? Icons.star_rate_rounded
+                          : Icons.star_outline_rounded,
+                    ),
+                    onPressed: toggleFavorite,
+                  ),
           ),
           Container(
             width: ScreenHelper.screenWidth(context),

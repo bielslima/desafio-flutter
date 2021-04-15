@@ -26,7 +26,7 @@ class PeopleRepository implements IPeopleRepository {
   }
 
   Future<Response> findPeoplesRemote({String? path, int page = 1}) async {
-    return getIt<HttpClient>().httpGet(
+    return await getIt<HttpClient>().httpGet(
       path ?? InfraConstants.BASE_URL_SWAPI + InfraConstants.ENDPOINT_PEOPLES,
       queryParameters: {
         'page': page.toString(),

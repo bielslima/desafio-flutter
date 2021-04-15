@@ -17,23 +17,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // final ApplicationStore appControl = getIt<ApplicationStore>();
+  final ApplicationStore appControl = getIt<ApplicationStore>();
   final HomePagePresenter presenter = getIt<HomePagePresenter>();
 
-  late ScrollController _scrollController;
+  // late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    this._scrollController = new ScrollController();
-    this._scrollController.addListener(
-        () => this.presenter.listenerScroll(this._scrollController));
+    // this._scrollController = new ScrollController();
+    this.presenter.loadingAllPeoples();
   }
 
   @override
   void dispose() {
     super.dispose();
-    this._scrollController.dispose();
+    // this._scrollController.dispose();
   }
 
   @override
@@ -48,7 +47,11 @@ class _HomePageState extends State<HomePage> {
               title: Logo(),
               searchIcon: IconButton(
                 icon: Icon(Icons.search),
-                onPressed: () => this.presenter.btnSearchPeople(context),
+                onPressed: () => appControl.navigateTo(
+                  context,
+                  RouterPaths.SEARCH,
+                  transitionType: TransitionType.fadeIn,
+                ),
               ),
               action: IconButton(
                 icon: Icon(Icons.filter_list),
@@ -56,10 +59,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Expanded(
-              child: Scrollbar(
-                controller: this._scrollController,
-                child: _buildListView(),
-              ),
+              child: _buildListView(),
             ),
           ],
         ),
@@ -76,43 +76,41 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildListView() {
     return Observer(
-      builder: (_) => ListView.separated(
-        controller: this._scrollController,
-        itemBuilder: (context, i) {
-          final List<People> peoples = this.presenter.showOnlyFavorites
-              ? presenter.peoplesFavorites
-              : presenter.peoples;
-          if (i == peoples.length) {
-            return Center(
-              child: Observer(
-                builder: (_) => this.presenter.isLoadingMorePeoples
-                    ? CircularProgressIndicator()
-                    : Container(),
-              ),
-            );
-          } else {
-            People people = peoples[i];
-            //     ? presenter.peoplesFavorites[i]
-            //     : ;
+      builder: (_) {
+        print("Build list peoples");
+        return ListView.separated(
+          shrinkWrap: true,
+          // controller: this._scrollController,
+          itemBuilder: (context, index) {
             return InkWell(
-              child: PeopleWidget(people),
-              onTap: () => this.presenter.showDetails(context, i),
-            );
-          }
-        },
-        itemCount: this.presenter.showOnlyFavorites
-            ? presenter.peoplesFavorites.length
-            : presenter.peoples.length + 1,
-        // this.presenter.peoples.length + 1,
-        separatorBuilder: (_, i) => SizedBox(
-          height: 10,
-        ),
-        padding: EdgeInsets.only(
-          right: 10,
-          left: 10,
-          bottom: 10,
-        ),
-      ),
+                child: PeopleWidget(presenter.peoples[index]),
+                onTap: () {
+                  appControl.navigateTo(
+                    context,
+                    RouterPaths.DETAILS.replaceAll(
+                      ':id',
+                      index.toString(),
+                    ),
+                    transitionType: TransitionType.fadeIn,
+                  );
+
+                  print('Selected id: $index');
+                  // print();
+                });
+          },
+          itemCount: this.presenter.showOnlyFavorites
+              ? presenter.peoplesFavorites.length
+              : presenter.peoples.length,
+          separatorBuilder: (_, i) => SizedBox(
+            height: 10,
+          ),
+          padding: EdgeInsets.only(
+            right: 10,
+            left: 10,
+            bottom: 10,
+          ),
+        );
+      },
     );
   }
 }
