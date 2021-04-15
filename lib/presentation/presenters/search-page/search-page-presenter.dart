@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
+import 'package:popcode_challenge_swapi/domain/usecases/search-peoples-local/search-peoples-local.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/search-peoples-remote/search-peoples-remote.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 import 'package:popcode_challenge_swapi/presentation/presenters/home-page/home-page-presenter.dart';
@@ -33,8 +34,8 @@ abstract class _SearchPagePresenterBase
     if (inputExpression.isEmpty) return;
     this.setIsSearchingPeoples(true);
     try {
-      await SearchPeoplesRemote.execute(inputExpression).then((qryPeoples) {
-        this.setPeoples(qryPeoples.results);
+      await SearchPeoplesLocal.execute(inputExpression).then((peoples) {
+        this.setPeoples(peoples);
       });
     } catch (e) {
       NotificationService.showToastError(e.toString());

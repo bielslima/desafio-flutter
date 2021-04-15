@@ -77,19 +77,21 @@ class _HomePageState extends State<HomePage> {
   Widget _buildListView() {
     return Observer(
       builder: (_) {
-        print("Build list peoples");
         return ListView.separated(
           shrinkWrap: true,
           // controller: this._scrollController,
           itemBuilder: (context, index) {
+            People people = this.presenter.showOnlyFavorites
+                ? presenter.peoplesFavorites[index]
+                : presenter.peoples[index];
             return InkWell(
-                child: PeopleWidget(presenter.peoples[index]),
+                child: PeopleWidget(people),
                 onTap: () {
                   appControl.navigateTo(
                     context,
                     RouterPaths.DETAILS.replaceAll(
                       ':id',
-                      index.toString(),
+                      people.id,
                     ),
                     transitionType: TransitionType.fadeIn,
                   );

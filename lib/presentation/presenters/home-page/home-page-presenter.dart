@@ -35,8 +35,19 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
   bool isLoadingMorePeoples = false;
 
   @action
-  void setValueFavoriteToPeople(int index, bool v) {
-    this.peoples[index].isFavorite = v;
+  void setValueFavoriteToPeople(String idPeople, bool v) {
+    // this.peoples.
+    this.peoples = ObservableList.of(this.peoples.map(
+      (element) {
+        if (element.id == idPeople) element.isFavorite = v;
+        return element;
+      },
+    ).toList());
+    // this
+    //     .peoples
+    //     .where((element) => element.id == idPeople)
+    //     .toList()[0]
+    //     .isFavorite = v;
   }
 
   @action
@@ -75,7 +86,6 @@ abstract class _HomePagePresenterBase with Store implements IHomePagePresenter {
         this.qryPeoples = await FindPeoplesUrl.execute(this.qryPeoples?.next);
         this._addPeoples(qryPeoples?.results);
       }
-      print('${this.peoples.length} Peoples.');
     } catch (e) {
       NotificationService.showToastError('Failed to fetch more results: $e');
     } finally {

@@ -26,6 +26,37 @@ mixin _$DetailsPagePresenter on _DetailsPagePresenterBase, Store {
     });
   }
 
+  final _$isLoadingPeopleAtom =
+      Atom(name: '_DetailsPagePresenterBase.isLoadingPeople');
+
+  @override
+  bool get isLoadingPeople {
+    _$isLoadingPeopleAtom.reportRead();
+    return super.isLoadingPeople;
+  }
+
+  @override
+  set isLoadingPeople(bool value) {
+    _$isLoadingPeopleAtom.reportWrite(value, super.isLoadingPeople, () {
+      super.isLoadingPeople = value;
+    });
+  }
+
+  final _$peopleAtom = Atom(name: '_DetailsPagePresenterBase.people');
+
+  @override
+  People get people {
+    _$peopleAtom.reportRead();
+    return super.people;
+  }
+
+  @override
+  set people(People value) {
+    _$peopleAtom.reportWrite(value, super.people, () {
+      super.people = value;
+    });
+  }
+
   final _$specieAtom = Atom(name: '_DetailsPagePresenterBase.specie');
 
   @override
@@ -135,9 +166,33 @@ mixin _$DetailsPagePresenter on _DetailsPagePresenterBase, Store {
   }
 
   @override
+  dynamic _setIsLoadingPeople(bool v) {
+    final _$actionInfo = _$_DetailsPagePresenterBaseActionController
+        .startAction(name: '_DetailsPagePresenterBase._setIsLoadingPeople');
+    try {
+      return super._setIsLoadingPeople(v);
+    } finally {
+      _$_DetailsPagePresenterBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic _setPeople(People p) {
+    final _$actionInfo = _$_DetailsPagePresenterBaseActionController
+        .startAction(name: '_DetailsPagePresenterBase._setPeople');
+    try {
+      return super._setPeople(p);
+    } finally {
+      _$_DetailsPagePresenterBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isFetchingPlanetAndSpecie: ${isFetchingPlanetAndSpecie},
+isLoadingPeople: ${isLoadingPeople},
+people: ${people},
 specie: ${specie},
 planet: ${planet},
 x: ${x},

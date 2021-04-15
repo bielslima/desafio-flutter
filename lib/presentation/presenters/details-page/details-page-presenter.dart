@@ -4,6 +4,7 @@ import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 import 'package:popcode_challenge_swapi/data/models/planet-model/planet.dart';
 import 'package:popcode_challenge_swapi/data/models/species-model/specie.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/find-planet-remote/find-planet-remote.dart';
+import 'package:popcode_challenge_swapi/domain/usecases/find-people-by-id/find-people-by-id.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/find-species-remote/find-species-remote.dart';
 
 import 'package:popcode_challenge_swapi/ui/pages/details/details-page-presenter.dart';
@@ -20,6 +21,12 @@ abstract class _DetailsPagePresenterBase
     implements IDetailsPagePresenter {
   @observable
   bool isFetchingPlanetAndSpecie = true;
+
+  @observable
+  bool isLoadingPeople = false;
+
+  @observable
+  late People people;
 
   @observable
   Specie? specie;
@@ -45,8 +52,29 @@ abstract class _DetailsPagePresenterBase
   @action
   _setIsFetchingPlanetAndSpecie(bool v) => this.isFetchingPlanetAndSpecie = v;
 
+  @action
+  _setIsLoadingPeople(bool v) => this.isLoadingPeople = v;
+
+  @action
+  _setPeople(People p) => this.people = p;
+
   void initAnimation() {
     this._setAnimation(0, 0);
+  }
+
+  Future searchPeopleById(String id) async {
+    try {
+      _setIsLoadingPeople(true);
+
+      await FindPeoplesByIdLocal.execute(id).then(_setPeople);
+
+      this.findHomeWorldAndSpecies(this.people.homeworld, this.people.species);
+    } catch (e) {
+      NotificationService.showToastError(
+          'Failed to fetch person information: $e');
+    } finally {
+      _setIsLoadingPeople(true);
+    }
   }
 
   void findHomeWorldAndSpecies(String endpoint, List<String> endpoints) {

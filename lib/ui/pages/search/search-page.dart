@@ -47,7 +47,7 @@ class _SearchPageState extends State<SearchPage> {
                                 context,
                                 RouterPaths.DETAILS.replaceAll(
                                   ':id',
-                                  index.toString(),
+                                  this._presenter.peoplesSrc[index].id,
                                 ),
                                 transitionType: TransitionType.fadeIn,
                               );

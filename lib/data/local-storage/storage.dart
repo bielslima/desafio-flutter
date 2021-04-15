@@ -1,5 +1,5 @@
 abstract class LocalStorage {
-  Future<dynamic> find({
+  Future<T> find<T>({
     required String boxName,
     required String key,
   });

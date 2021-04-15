@@ -10,8 +10,8 @@ import 'package:popcode_challenge_swapi/ui/constants.dart';
 import 'package:popcode_challenge_swapi/ui/utils/screen-helper.dart';
 
 class DetailsPage extends StatefulWidget {
-  final int indexPeople;
-  DetailsPage(this.indexPeople);
+  final String idPeople;
+  DetailsPage(this.idPeople);
   @override
   _DetailsPageState createState() => _DetailsPageState();
 }
@@ -28,8 +28,11 @@ class _DetailsPageState extends State<DetailsPage>
   @override
   void initState() {
     super.initState();
-    this._people =
-        this._homePagePresenter.peoples.elementAt(widget.indexPeople);
+    this._people = this
+        ._homePagePresenter
+        .peoples
+        .where((el) => el.id == widget.idPeople)
+        .first;
     _presenter.findHomeWorldAndSpecies(
         this._people.homeworld, this._people.species);
   }
@@ -43,7 +46,7 @@ class _DetailsPageState extends State<DetailsPage>
     setState(() => this.loadingFavorite = true);
     _people.isFavorite = await _people.toggleFavorite(_people.isFavorite);
     _homePagePresenter.setValueFavoriteToPeople(
-        widget.indexPeople, _people.isFavorite);
+        widget.idPeople, _people.isFavorite);
     setState(() => this.loadingFavorite = false);
   }
 

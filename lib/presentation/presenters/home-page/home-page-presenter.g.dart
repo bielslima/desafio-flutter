@@ -77,11 +77,11 @@ mixin _$HomePagePresenter on _HomePagePresenterBase, Store {
       ActionController(name: '_HomePagePresenterBase');
 
   @override
-  void setValueFavoriteToPeople(int index, bool v) {
+  void setValueFavoriteToPeople(String idPeople, bool v) {
     final _$actionInfo = _$_HomePagePresenterBaseActionController.startAction(
         name: '_HomePagePresenterBase.setValueFavoriteToPeople');
     try {
-      return super.setValueFavoriteToPeople(index, v);
+      return super.setValueFavoriteToPeople(idPeople, v);
     } finally {
       _$_HomePagePresenterBaseActionController.endAction(_$actionInfo);
     }

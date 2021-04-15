@@ -6,13 +6,17 @@ import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 @Injectable(as: LocalStorage)
 class LocalStorageImpl implements LocalStorage {
   @override
-  Future<dynamic> find({
+  Future<T> find<T>({
     required String boxName,
     required String key,
   }) async {
-    Box box = await Hive.openBox(boxName);
+    Box box = await Hive.openBox<T>(boxName);
 
-    return box.get(key);
+    final T retorno = await box.get(key);
+
+    await box.close();
+
+    return retorno;
   }
 
   @override
@@ -21,7 +25,11 @@ class LocalStorageImpl implements LocalStorage {
   }) async {
     Box<T> box = await Hive.openBox<T>(boxName);
 
-    return box.values;
+    final Iterable<T> retorno = box.values;
+
+    await box.close();
+
+    return retorno;
   }
 
   @override
@@ -33,7 +41,11 @@ class LocalStorageImpl implements LocalStorage {
     print('Writing $boxName => $key');
     Box box = await Hive.openBox(boxName);
 
-    return box.put(key, data);
+    await box.put(key, data);
+
+    await box.close();
+
+    return;
   }
 
   @override
@@ -43,7 +55,11 @@ class LocalStorageImpl implements LocalStorage {
   }) async {
     Box box = await Hive.openBox(boxName);
 
-    return box.putAll(data);
+    await box.putAll(data);
+
+    await box.close();
+
+    return;
   }
 
   @override
@@ -53,6 +69,10 @@ class LocalStorageImpl implements LocalStorage {
   }) async {
     Box box = await Hive.openBox(boxName);
 
-    return box.delete(key);
+    await box.delete(key);
+
+    box.close();
+
+    return;
   }
 }
