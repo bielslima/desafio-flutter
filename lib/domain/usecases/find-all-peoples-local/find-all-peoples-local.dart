@@ -1,33 +1,29 @@
-import 'package:dio/dio.dart';
 import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
-import 'package:popcode_challenge_swapi/data/models/query-peoples-model/query-peoples.dart';
-import 'package:popcode_challenge_swapi/infra/constants.dart';
+import 'package:popcode_challenge_swapi/domain/usecases/verify-people-favorite/verify-people-favorite.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 import 'package:popcode_challenge_swapi/infra/repositories/People/people-repository.dart';
 
-class FindAllPeoplesLocal {
-  static Future execute() async {
-    PeopleRepository repository = getIt<PeopleRepository>();
+class FindPeoplesLocal {
+  static Future<List<People>> execute({int? page}) async {
     try {
-      QueryPeoples qryPeoples = QueryPeoples(
-          0,
-          InfraConstants.BASE_URL_SWAPI + InfraConstants.ENDPOINT_PEOPLES,
-          '', []);
-      List<People> peoples = [];
+      Iterable itPeoples =
+          getIt<PeopleRepository>().findPeoplesLocal(page ?? 1);
 
-      while (qryPeoples.next != '') {
-        Response response =
-            await repository.findAllPeoplesWithUrlRemote(qryPeoples.next);
+      List peoples = itPeoples.toList();
 
-        if (response.statusCode == 200) {
-          qryPeoples = QueryPeoples.fromJson(response.data);
-          print('Founded ${qryPeoples.results.length} peoples');
-          peoples.addAll(qryPeoples.results);
-        }
+      for (int i = 0; i < peoples.length; i++) {
+        People p = peoples[i];
+
+        p.isFavorite = await VerifyPeopleFavorite.execute(p.id);
       }
-      print('Founded ended ${peoples.length} peoples');
+
+      peoples as List<People>;
+
+      peoples.sort((p1, p2) => int.parse(p1.id).compareTo(int.parse(p2.id)));
+
+      return peoples;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 }

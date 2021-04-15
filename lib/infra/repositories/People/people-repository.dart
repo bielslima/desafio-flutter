@@ -14,12 +14,12 @@ abstract class IPeopleRepository {
 
 @injectable
 class PeopleRepository implements IPeopleRepository {
-  Future<Iterable<People>> findPeoplesLocal(int page) async {
+  Iterable findPeoplesLocal(int page) {
     return getIt<LocalStorage>()
-        .findAll(boxName: InfraConstants.HIVE_BOX_PEOPLE);
+        .findAll<People>(boxName: InfraConstants.HIVE_BOX_PEOPLE);
   }
 
-  Future<Response> findAllPeoplesWithUrlRemote(String url) async {
+  Future<Response> findFromUrl(String url) async {
     return getIt<HttpClient>().httpGet(
       url,
     );

@@ -5,8 +5,9 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:popcode_challenge_swapi/data/models/queue-favorite-request/queue-favorite-request.dart';
+import 'package:popcode_challenge_swapi/data/models/models.dart';
 import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
+import 'package:popcode_challenge_swapi/infra/constants.dart';
 import 'package:popcode_challenge_swapi/ui/components/theme-app.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -25,11 +26,21 @@ Future<void> initHiveDatabase() async {
   Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   registerHiveAdapters();
+
+  await Hive.openBox<bool>(InfraConstants.HIVE_BOX_FAVORITES);
+  await Hive.openBox<int>(InfraConstants.HIVE_BOX_MAIN);
+  await Hive.openBox<People>(InfraConstants.HIVE_BOX_PEOPLE);
+  await Hive.openBox<Planet>(InfraConstants.HIVE_BOX_PLANET);
+  await Hive.openBox<QueueFavoriteRequest>(
+      InfraConstants.HIVE_BOX_QUEUEFAVORITES);
+  await Hive.openBox<Specie>(InfraConstants.HIVE_BOX_SPECIE);
 }
 
 void registerHiveAdapters() {
   Hive.registerAdapter(PeopleAdapter());
   Hive.registerAdapter(QueueFavoriteRequestAdapter());
+  Hive.registerAdapter(SpecieAdapter());
+  Hive.registerAdapter(PlanetAdapter());
 }
 
 class App extends StatelessWidget {

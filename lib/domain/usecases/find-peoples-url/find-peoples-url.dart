@@ -9,8 +9,8 @@ import 'package:popcode_challenge_swapi/infra/repositories/People/people-reposit
 class FindPeoplesUrl {
   static Future<QueryPeoples> execute(String? url) async {
     try {
-      Response response = await getIt<PeopleRepository>()
-          .findAllPeoplesWithUrlRemote(url ?? "");
+      Response response =
+          await getIt<PeopleRepository>().findFromUrl(url ?? "");
 
       if (response.statusCode == 200) {
         QueryPeoples qryPeoples = QueryPeoples.fromJson(response.data);

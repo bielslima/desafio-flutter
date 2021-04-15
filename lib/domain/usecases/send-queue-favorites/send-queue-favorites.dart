@@ -11,11 +11,9 @@ class SendQueueFavorites {
       final LocalStorage localStorage = getIt<LocalStorage>();
       final FavoriteRepository favoriteRepository = getIt<FavoriteRepository>();
 
-      Iterable queue = await localStorage.findAll(
+      Iterable queue = localStorage.findAll<QueueFavoriteRequest>(
         boxName: InfraConstants.HIVE_BOX_QUEUEFAVORITES,
       );
-
-      print('${queue.length} Favorites to sync');
 
       for (QueueFavoriteRequest favRequest in queue) {
         Response response = await favoriteRepository.setFavorite(
@@ -28,7 +26,6 @@ class SendQueueFavorites {
         }
       }
     } catch (e) {
-      print(e);
       rethrow;
     }
   }

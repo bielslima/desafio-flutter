@@ -5,7 +5,6 @@ import 'package:popcode_challenge_swapi/domain/usecases/save-peoples-local-stora
 import 'package:popcode_challenge_swapi/domain/usecases/verify-people-favorite/verify-people-favorite.dart';
 import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 import 'package:popcode_challenge_swapi/infra/repositories/People/people-repository.dart';
-import 'package:popcode_challenge_swapi/ui/utils/notification-service.dart';
 
 import '../../../data/models/query-peoples-model/query-peoples.dart';
 
@@ -21,8 +20,6 @@ class FindPeoplesRemote {
         qryPeoples = QueryPeoples.fromJson(response.data);
 
         await SavePeoplesLocalStorage.execute(qryPeoples.results);
-
-        print('Saved ${qryPeoples.results.length} peoples in local database');
 
         for (int i = 0; i < qryPeoples.results.length; i++) {
           People p = qryPeoples.results[i];

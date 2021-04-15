@@ -3,9 +3,12 @@ import 'package:injectable/injectable.dart';
 import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 import 'package:popcode_challenge_swapi/data/models/planet-model/planet.dart';
 import 'package:popcode_challenge_swapi/data/models/species-model/specie.dart';
+import 'package:popcode_challenge_swapi/domain/usecases/find-people-local/find-people-local.dart';
+import 'package:popcode_challenge_swapi/domain/usecases/find-planet-local/find-planet-local.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/find-planet-remote/find-planet-remote.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/find-people-by-id/find-people-by-id.dart';
 import 'package:popcode_challenge_swapi/domain/usecases/find-species-remote/find-species-remote.dart';
+import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
+import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 
 import 'package:popcode_challenge_swapi/ui/pages/details/details-page-presenter.dart';
 import 'package:popcode_challenge_swapi/ui/utils/notification-service.dart';
@@ -19,6 +22,8 @@ class DetailsPagePresenter = _DetailsPagePresenterBase
 abstract class _DetailsPagePresenterBase
     with Store
     implements IDetailsPagePresenter {
+  ApplicationStore appStore = getIt<ApplicationStore>();
+
   @observable
   bool isFetchingPlanetAndSpecie = true;
 
@@ -66,7 +71,7 @@ abstract class _DetailsPagePresenterBase
     try {
       _setIsLoadingPeople(true);
 
-      await FindPeoplesByIdLocal.execute(id).then(_setPeople);
+      await FindPeopleLocal.execute(id).then(_setPeople);
 
       this.findHomeWorldAndSpecies(this.people.homeworld, this.people.species);
     } catch (e) {
@@ -78,13 +83,25 @@ abstract class _DetailsPagePresenterBase
   }
 
   void findHomeWorldAndSpecies(String endpoint, List<String> endpoints) {
-    Future.wait([
-      FindPlanetRemote.execute(endpoint),
-      FindSpeciesRemote.execute(endpoints),
-    ]).then((result) {
-      this._setIsFetchingPlanetAndSpecie(false);
-      this._setPlanet(result[0]);
-      if (result[1].length != 0) this._setSpecie(result[1][0]);
-    });
+    if (appStore.isConnected)
+      Future.wait([
+        FindPlanetRemote.execute(endpoint),
+        FindSpeciesRemote.execute(endpoints),
+      ]).then((result) {
+        this._setIsFetchingPlanetAndSpecie(false);
+        this._setPlanet(result[0]);
+        if (result[1].length != 0) this._setSpecie(result[1][0]);
+      });
+    else
+      Future.wait([
+        FindPlanetLocal.execute(endpoint),
+        // FindSpecieLocal.execute(endpoints),
+      ]).then(
+        (result) {
+          this._setIsFetchingPlanetAndSpecie(false);
+          this._setPlanet(result[0]);
+          // if (result[1].length != 0) this._setSpecie(result[1] as Specie);
+        },
+      );
   }
 }

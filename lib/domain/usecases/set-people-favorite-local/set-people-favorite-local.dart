@@ -17,13 +17,13 @@ class SetPeopleFavoriteLocal {
       if (appStore.isConnected)
         setAsFavorite = await SetPeopleFavoriteRemote.execute(idPeople);
       else
-        await localStorage.write(
+        await localStorage.write<QueueFavoriteRequest>(
           boxName: InfraConstants.HIVE_BOX_QUEUEFAVORITES,
           key: idPeople,
           data: QueueFavoriteRequest(idPeople),
         );
       if (!setAsFavorite)
-        await localStorage.write(
+        await localStorage.write<QueueFavoriteRequest>(
           boxName: InfraConstants.HIVE_BOX_QUEUEFAVORITES,
           key: idPeople,
           data: QueueFavoriteRequest(idPeople),
@@ -31,7 +31,7 @@ class SetPeopleFavoriteLocal {
     } catch (e) {
       throw e;
     } finally {
-      await localStorage.write(
+      await localStorage.write<bool>(
         boxName: InfraConstants.HIVE_BOX_FAVORITES,
         key: idPeople,
         data: true,

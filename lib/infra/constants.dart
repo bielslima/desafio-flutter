@@ -4,6 +4,8 @@ class InfraConstants {
       "http://private-782d3-starwarsfavorites.apiary-mock.com";
 
   static const ENDPOINT_PEOPLES = '/api/people';
+  static const ENDPOINT_SPECIES = '/api/species';
+  static const ENDPOINT_PLANETS = '/api/planets';
   static const ENDPOINT_FAVORITES = '/favorite/:id';
 
   static const HIVE_BOX_MAIN = 'main';

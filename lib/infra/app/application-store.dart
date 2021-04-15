@@ -12,7 +12,7 @@ class ApplicationStore = _ApplicationStoreBase with _$ApplicationStore;
 
 abstract class _ApplicationStoreBase with Store {
   late FluroRouter router;
-  late bool isConnected = false;
+  late bool isConnected = true;
 
   Future<dynamic> navigateTo(
     BuildContext context,

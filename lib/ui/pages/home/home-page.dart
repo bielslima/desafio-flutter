@@ -95,9 +95,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                     transitionType: TransitionType.fadeIn,
                   );
-
-                  print('Selected id: $index');
-                  // print();
                 });
           },
           itemCount: this.presenter.showOnlyFavorites

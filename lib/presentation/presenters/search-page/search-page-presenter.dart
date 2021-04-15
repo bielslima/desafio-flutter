@@ -34,9 +34,8 @@ abstract class _SearchPagePresenterBase
     if (inputExpression.isEmpty) return;
     this.setIsSearchingPeoples(true);
     try {
-      await SearchPeoplesLocal.execute(inputExpression).then((peoples) {
-        this.setPeoples(peoples);
-      });
+      List<People> peoples = SearchPeoplesLocal.execute(inputExpression);
+      this.setPeoples(peoples);
     } catch (e) {
       NotificationService.showToastError(e.toString());
     } finally {

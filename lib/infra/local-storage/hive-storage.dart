@@ -1,78 +1,84 @@
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:popcode_challenge_swapi/data/local-storage/local-storage.dart';
-import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
 
 @Injectable(as: LocalStorage)
 class LocalStorageImpl implements LocalStorage {
   @override
-  Future<T> find<T>({
+  Future find<T>({
     required String boxName,
     required String key,
   }) async {
-    Box box = await Hive.openBox<T>(boxName);
+    Box<T> box = Hive.box<T>(boxName);
 
-    final T retorno = await box.get(key);
-
-    await box.close();
-
-    return retorno;
+    return box.get(key);
   }
 
   @override
-  Future<Iterable<T>> findAll<T>({
+  Iterable findAll<T>({
     required String boxName,
-  }) async {
-    Box<T> box = await Hive.openBox<T>(boxName);
+  }) {
+    Box box = Hive.box<T>(boxName);
 
-    final Iterable<T> retorno = box.values;
+    // final Iterable retorno = ;
 
-    await box.close();
+    // await box.close();
 
-    return retorno;
+    return box.values;
   }
 
   @override
-  Future<void> write({
+  Future<void> write<T>({
     required String boxName,
     required String key,
     required dynamic data,
   }) async {
-    print('Writing $boxName => $key');
-    Box box = await Hive.openBox(boxName);
+    Box box = Hive.box<T>(boxName);
 
-    await box.put(key, data);
+    // if (Hive.isBoxOpen(boxName)) await Hive.openBox(boxName);
 
-    await box.close();
+    // box = Hive.box(boxName);
 
-    return;
+    // await box.put(key, data);
+
+    // await box.close();
+
+    return box.put(key, data);
   }
 
   @override
-  Future<void> writeAll({
+  Future<void> writeAll<T>({
     required String boxName,
     required dynamic data,
   }) async {
-    Box box = await Hive.openBox(boxName);
+    Box box = Hive.box<T>(boxName);
 
-    await box.putAll(data);
+    // if (Hive.isBoxOpen(boxName)) await Hive.openBox(boxName);
 
-    await box.close();
+    // box = Hive.box(boxName);
 
-    return;
+    // await box.putAll(data);
+
+    // await box.close();
+
+    return box.putAll(data);
   }
 
   @override
-  Future<dynamic> delete({
+  Future delete<T>({
     required String boxName,
     required String key,
   }) async {
-    Box box = await Hive.openBox(boxName);
+    Box<T> box = Hive.box<T>(boxName);
 
-    await box.delete(key);
+    // if (Hive.isBoxOpen(boxName)) await Hive.openBox(boxName);
 
-    box.close();
+    // box = Hive.box(boxName);
 
-    return;
+    // await box.delete(key);
+
+    // box.close();
+
+    return box.delete(key);
   }
 }

@@ -8,7 +8,7 @@ class VerifyPeopleFavorite {
     try {
       LocalStorage localStorage = getIt<LocalStorage>();
 
-      bool? peopleIsFavorite = await localStorage.find(
+      bool? peopleIsFavorite = await localStorage.find<bool>(
           boxName: InfraConstants.HIVE_BOX_FAVORITES, key: idPeople);
 
       return peopleIsFavorite ?? false;

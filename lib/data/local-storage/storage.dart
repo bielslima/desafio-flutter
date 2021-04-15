@@ -1,25 +1,25 @@
 abstract class LocalStorage {
-  Future<T> find<T>({
+  Future find<T>({
     required String boxName,
     required String key,
   });
 
-  Future<Iterable<T>> findAll<T>({
+  Iterable findAll<T>({
     required String boxName,
   });
 
-  Future<void> write({
+  Future<void> write<T>({
     required String boxName,
     required String key,
     required dynamic data,
   });
 
-  Future<void> writeAll({
+  Future<void> writeAll<T>({
     required String boxName,
     required Map<dynamic, dynamic> data,
   });
 
-  Future<void> delete({
+  Future delete<T>({
     required String boxName,
     required String key,
   });
