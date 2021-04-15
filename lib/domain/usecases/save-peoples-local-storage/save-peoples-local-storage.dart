@@ -1,7 +1,7 @@
-import 'package:popcode_challenge_swapi/data/local-storage/storage.dart';
-import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
-import 'package:popcode_challenge_swapi/infra/constants.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
+import '../../../data/local-storage/storage.dart';
+import '../../../data/models/people-model/people.dart';
+import '../../../infra/constants.dart';
+import '../../../infra/dependency-injection/injectable.dart';
 
 class SavePeoplesLocalStorage {
   static Future execute(List<People> peoples) async {

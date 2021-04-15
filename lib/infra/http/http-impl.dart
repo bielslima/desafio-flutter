@@ -1,9 +1,8 @@
 import 'package:injectable/injectable.dart';
-// import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 import '../../data/http/http.dart';
-import 'interceptor.dart';
+import './interceptor.dart';
 
 @Injectable(
   as: HttpClient,

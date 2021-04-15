@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:popcode_challenge_swapi/data/local-storage/storage.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 
+import '../../data/local-storage/storage.dart';
+import '../../infra/dependency-injection/injectable.dart';
 import '../constants.dart';
 
 class HttpInterceptors extends Interceptor {
@@ -14,6 +14,8 @@ class HttpInterceptors extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    // print('[${options.method}] => ${options.uri}');
+
     if (options.path.contains('starwarsfavorites')) {
       int count = await localStorage.find<int>(
               boxName: InfraConstants.HIVE_BOX_MAIN,

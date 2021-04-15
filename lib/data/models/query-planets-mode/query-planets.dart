@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:popcode_challenge_swapi/data/models/models.dart';
+
+import '../planet-model/planet.dart';
 
 part 'query-planets.g.dart';
 

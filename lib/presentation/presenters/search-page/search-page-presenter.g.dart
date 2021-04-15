@@ -44,22 +44,22 @@ mixin _$SearchPagePresenter on _SearchPagePresenterBase, Store {
       ActionController(name: '_SearchPagePresenterBase');
 
   @override
-  void setPeoples(List<People> pList) {
+  void _setPeoples(List<People> pList) {
     final _$actionInfo = _$_SearchPagePresenterBaseActionController.startAction(
-        name: '_SearchPagePresenterBase.setPeoples');
+        name: '_SearchPagePresenterBase._setPeoples');
     try {
-      return super.setPeoples(pList);
+      return super._setPeoples(pList);
     } finally {
       _$_SearchPagePresenterBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setIsSearchingPeoples(bool v) {
+  void _setIsSearchingPeoples(bool v) {
     final _$actionInfo = _$_SearchPagePresenterBaseActionController.startAction(
-        name: '_SearchPagePresenterBase.setIsSearchingPeoples');
+        name: '_SearchPagePresenterBase._setIsSearchingPeoples');
     try {
-      return super.setIsSearchingPeoples(v);
+      return super._setIsSearchingPeoples(v);
     } finally {
       _$_SearchPagePresenterBaseActionController.endAction(_$actionInfo);
     }

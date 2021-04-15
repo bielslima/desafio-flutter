@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
+
+import '../people-model/people.dart';
 
 part 'query-peoples.g.dart';
 

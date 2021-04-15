@@ -1,7 +1,7 @@
-import 'package:popcode_challenge_swapi/data/local-storage/storage.dart';
-import 'package:popcode_challenge_swapi/data/models/planet-model/planet.dart';
-import 'package:popcode_challenge_swapi/infra/constants.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
+import '../../../data/local-storage/storage.dart';
+import '../../../data/models/planet-model/planet.dart';
+import '../../../infra/constants.dart';
+import '../../../infra/dependency-injection/injectable.dart';
 
 class SavePlanetsLocalStorage {
   static Future execute(List<Planet> planets) async {
@@ -9,33 +9,32 @@ class SavePlanetsLocalStorage {
       LocalStorage localStorage = getIt<LocalStorage>();
 
       for (int i = 0; i < planets.length; i++) {
-        Planet peopleRemote = planets[i];
+        Planet planetRemote = planets[i];
 
         Planet? peopleLocal = await localStorage.find<Planet>(
-            boxName: InfraConstants.HIVE_BOX_PLANET, key: peopleRemote.id);
+            boxName: InfraConstants.HIVE_BOX_PLANET, key: planetRemote.id);
 
         if (peopleLocal != null) {
           DateTime currentLocalDateEdited = DateTime.parse(peopleLocal.edited);
           DateTime currentRemoteDateEdited =
-              DateTime.parse(peopleRemote.edited);
+              DateTime.parse(planetRemote.edited);
 
           if (currentRemoteDateEdited.microsecondsSinceEpoch >
               currentLocalDateEdited.microsecondsSinceEpoch) {
             await localStorage.write<Planet>(
               boxName: InfraConstants.HIVE_BOX_PLANET,
-              key: peopleRemote.id,
-              data: peopleRemote,
+              key: planetRemote.id,
+              data: planetRemote,
             );
           }
         } else {
           await localStorage.write<Planet>(
             boxName: InfraConstants.HIVE_BOX_PLANET,
-            key: peopleRemote.id,
-            data: peopleRemote,
+            key: planetRemote.id,
+            data: planetRemote,
           );
         }
       }
-      print("writed ${planets.length} plantes in local storage.");
     } catch (e) {
       throw e;
     }

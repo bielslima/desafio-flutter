@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
-import 'package:popcode_challenge_swapi/data/local-storage/local-storage.dart';
+
+import '../../data/local-storage/local-storage.dart';
 
 @Injectable(as: LocalStorage)
 class LocalStorageImpl implements LocalStorage {
@@ -10,7 +11,6 @@ class LocalStorageImpl implements LocalStorage {
     required String key,
   }) async {
     Box<T> box = Hive.box<T>(boxName);
-
     return box.get(key);
   }
 
@@ -19,11 +19,6 @@ class LocalStorageImpl implements LocalStorage {
     required String boxName,
   }) {
     Box box = Hive.box<T>(boxName);
-
-    // final Iterable retorno = ;
-
-    // await box.close();
-
     return box.values;
   }
 
@@ -34,15 +29,6 @@ class LocalStorageImpl implements LocalStorage {
     required dynamic data,
   }) async {
     Box box = Hive.box<T>(boxName);
-
-    // if (Hive.isBoxOpen(boxName)) await Hive.openBox(boxName);
-
-    // box = Hive.box(boxName);
-
-    // await box.put(key, data);
-
-    // await box.close();
-
     return box.put(key, data);
   }
 
@@ -52,15 +38,6 @@ class LocalStorageImpl implements LocalStorage {
     required dynamic data,
   }) async {
     Box box = Hive.box<T>(boxName);
-
-    // if (Hive.isBoxOpen(boxName)) await Hive.openBox(boxName);
-
-    // box = Hive.box(boxName);
-
-    // await box.putAll(data);
-
-    // await box.close();
-
     return box.putAll(data);
   }
 
@@ -70,15 +47,6 @@ class LocalStorageImpl implements LocalStorage {
     required String key,
   }) async {
     Box<T> box = Hive.box<T>(boxName);
-
-    // if (Hive.isBoxOpen(boxName)) await Hive.openBox(boxName);
-
-    // box = Hive.box(boxName);
-
-    // await box.delete(key);
-
-    // box.close();
-
     return box.delete(key);
   }
 }

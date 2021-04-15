@@ -1,13 +1,14 @@
-import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
-import 'package:popcode_challenge_swapi/presentation/presenters/details-page/details-page-presenter.dart';
-import 'package:popcode_challenge_swapi/presentation/presenters/home-page/home-page-presenter.dart';
-import 'package:popcode_challenge_swapi/ui/components/app-header.dart';
-import 'package:popcode_challenge_swapi/ui/constants.dart';
-import 'package:popcode_challenge_swapi/ui/utils/screen-helper.dart';
+
+import '../../../data/models/people-model/people.dart';
+import '../../../infra/dependency-injection/injectable.dart';
+import '../../../presentation/presenters/details-page/details-page-presenter.dart';
+import '../../../presentation/presenters/home-page/home-page-presenter.dart';
+import '../../../ui/components/app-header.dart';
+import '../../../ui/constants.dart';
+import '../../../ui/utils/screen-helper.dart';
 
 class DetailsPage extends StatefulWidget {
   final String idPeople;

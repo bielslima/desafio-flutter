@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:popcode_challenge_swapi/infra/constants.dart';
+
+import '../../../infra/constants.dart';
 
 part 'queue-favorite-request.g.dart';
 

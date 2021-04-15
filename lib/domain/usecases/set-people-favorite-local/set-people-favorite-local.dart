@@ -1,10 +1,9 @@
-import 'package:flutter/rendering.dart';
-import 'package:popcode_challenge_swapi/data/local-storage/local-storage.dart';
-import 'package:popcode_challenge_swapi/data/models/queue-favorite-request/queue-favorite-request.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/set-people-favorite-remote/set-people-favorite-remote.dart';
-import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
-import 'package:popcode_challenge_swapi/infra/constants.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
+import '../../../data/local-storage/local-storage.dart';
+import '../../../data/models/queue-favorite-request/queue-favorite-request.dart';
+import '../../../domain/usecases/set-people-favorite-remote/set-people-favorite-remote.dart';
+import '../../../infra/app/application-store.dart';
+import '../../../infra/constants.dart';
+import '../../../infra/dependency-injection/injectable.dart';
 
 class SetPeopleFavoriteLocal {
   static Future execute(String idPeople) async {

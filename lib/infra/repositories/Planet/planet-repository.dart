@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:popcode_challenge_swapi/data/http/http-client.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
+
+import '../../../data/http/http-client.dart';
+import '../../../infra/dependency-injection/injectable.dart';
 
 abstract class IPlanetRepository {
   Future<Response> findPlanetRemote(String endpoint);

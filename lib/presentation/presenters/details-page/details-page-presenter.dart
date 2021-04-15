@@ -1,17 +1,19 @@
 import 'package:mobx/mobx.dart';
 import 'package:injectable/injectable.dart';
-import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
-import 'package:popcode_challenge_swapi/data/models/planet-model/planet.dart';
-import 'package:popcode_challenge_swapi/data/models/species-model/specie.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/find-people-local/find-people-local.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/find-planet-local/find-planet-local.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/find-planet-remote/find-planet-remote.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/find-species-remote/find-species-remote.dart';
-import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
 
-import 'package:popcode_challenge_swapi/ui/pages/details/details-page-presenter.dart';
-import 'package:popcode_challenge_swapi/ui/utils/notification-service.dart';
+import '../../../data/models/people-model/people.dart';
+import '../../../data/models/planet-model/planet.dart';
+import '../../../data/models/species-model/specie.dart';
+import '../../../domain/usecases/find-people-local/find-people-local.dart';
+import '../../../domain/usecases/find-planet-local/find-planet-local.dart';
+import '../../../domain/usecases/find-planet-remote/find-planet-remote.dart';
+import '../../../domain/usecases/find-specie-local/find-specie-local.dart';
+import '../../../domain/usecases/find-species-remote/find-species-remote.dart';
+import '../../../infra/app/application-store.dart';
+import '../../../infra/dependency-injection/injectable.dart';
+import '../../../presentation/utils/IdFromUrl.dart';
+import '../../../ui/pages/details/details-page-presenter.dart';
+import '../../../ui/utils/notification-service.dart';
 
 part 'details-page-presenter.g.dart';
 
@@ -67,21 +69,6 @@ abstract class _DetailsPagePresenterBase
     this._setAnimation(0, 0);
   }
 
-  Future searchPeopleById(String id) async {
-    try {
-      _setIsLoadingPeople(true);
-
-      await FindPeopleLocal.execute(id).then(_setPeople);
-
-      this.findHomeWorldAndSpecies(this.people.homeworld, this.people.species);
-    } catch (e) {
-      NotificationService.showToastError(
-          'Failed to fetch person information: $e');
-    } finally {
-      _setIsLoadingPeople(true);
-    }
-  }
-
   void findHomeWorldAndSpecies(String endpoint, List<String> endpoints) {
     if (appStore.isConnected)
       Future.wait([
@@ -94,13 +81,14 @@ abstract class _DetailsPagePresenterBase
       });
     else
       Future.wait([
-        FindPlanetLocal.execute(endpoint),
-        // FindSpecieLocal.execute(endpoints),
+        FindPlanetLocal.execute(IdFromUrlHelper.execute(endpoint)),
+        FindSpecieLocal.execute(
+            endpoints.length > 0 ? IdFromUrlHelper.execute(endpoints[0]) : ''),
       ]).then(
         (result) {
           this._setIsFetchingPlanetAndSpecie(false);
-          this._setPlanet(result[0]);
-          // if (result[1].length != 0) this._setSpecie(result[1] as Specie);
+          this._setPlanet(result[0] as Planet);
+          if (result[1] != null) this._setSpecie(result[1] as Specie);
         },
       );
   }

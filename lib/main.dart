@@ -5,13 +5,12 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:popcode_challenge_swapi/data/models/models.dart';
-import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
-import 'package:popcode_challenge_swapi/infra/constants.dart';
-import 'package:popcode_challenge_swapi/ui/components/theme-app.dart';
 import 'package:path_provider/path_provider.dart';
 
 import './data/models/models.dart';
+import './infra/app/application-store.dart';
+import './infra/constants.dart';
+import './ui/components/theme-app.dart';
 import './infra/routes/routes.dart';
 import './infra/dependency-injection/injectable.dart' as di;
 

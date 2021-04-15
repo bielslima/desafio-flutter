@@ -1,7 +1,7 @@
-import 'package:popcode_challenge_swapi/data/local-storage/storage.dart';
-import 'package:popcode_challenge_swapi/data/models/models.dart';
-import 'package:popcode_challenge_swapi/infra/constants.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
+import '../../../data/local-storage/storage.dart';
+import '../../../data/models/models.dart';
+import '../../../infra/constants.dart';
+import '../../../infra/dependency-injection/injectable.dart';
 
 class FindPlanetLocal {
   static Future<Planet> execute(String id) async {

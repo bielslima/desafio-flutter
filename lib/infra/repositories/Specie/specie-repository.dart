@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:popcode_challenge_swapi/data/http/http-client.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
+
+import '../../../data/http/http-client.dart';
+import '../../../infra/dependency-injection/injectable.dart';
 
 abstract class ISpecieRepository {
   Future findSpecieRemote(String endpoint);

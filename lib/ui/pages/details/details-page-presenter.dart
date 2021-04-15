@@ -3,6 +3,4 @@ abstract class IDetailsPagePresenter {
 
   void initAnimation();
   void findHomeWorldAndSpecies(String endpoint, List<String> endpoints);
-  // void findHomeWorld(String endpoint);
-  // void findSpecies(List<String> endpoints);
 }

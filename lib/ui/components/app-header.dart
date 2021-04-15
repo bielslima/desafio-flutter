@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:popcode_challenge_swapi/ui/utils/screen-helper.dart';
+
+import '../../ui/utils/screen-helper.dart';
 
 class AppHeader extends StatelessWidget {
   final bool centerTitle;

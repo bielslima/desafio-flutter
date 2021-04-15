@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
-import 'package:popcode_challenge_swapi/infra/repositories/Favorite/favorite-repository.dart';
-import 'package:popcode_challenge_swapi/ui/utils/notification-service.dart';
+
+import '../../../infra/dependency-injection/injectable.dart';
+import '../../../infra/repositories/Favorite/favorite-repository.dart';
+import '../../../ui/utils/notification-service.dart';
 
 class SetPeopleFavoriteRemote {
   static Future execute(String idPeople) async {

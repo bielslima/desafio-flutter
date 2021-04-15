@@ -1,13 +1,13 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
-import 'package:popcode_challenge_swapi/infra/routes/routes.dart';
-import 'package:popcode_challenge_swapi/presentation/presenters/search-page/search-page-presenter.dart';
-import 'package:popcode_challenge_swapi/presentation/presenters/splash-page/splash-presenter.dart';
-import 'package:popcode_challenge_swapi/ui/constants.dart';
-import './components/header-page.dart';
+
+import '../../../infra/app/application-store.dart';
+import '../../../infra/dependency-injection/injectable.dart';
+import '../../../infra/routes/routes.dart';
+import '../../../presentation/presenters/search-page/search-page-presenter.dart';
+import '../../../ui/constants.dart';
+import './components/components.dart';
 
 class SearchPage extends StatefulWidget {
   @override

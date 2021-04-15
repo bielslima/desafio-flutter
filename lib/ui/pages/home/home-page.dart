@@ -1,15 +1,15 @@
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
-import 'package:popcode_challenge_swapi/infra/app/application-store.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
-import 'package:popcode_challenge_swapi/infra/routes/routes.dart';
-import 'package:popcode_challenge_swapi/presentation/presenters/home-page/home-page-presenter.dart';
-import 'package:popcode_challenge_swapi/ui/components/app-header.dart';
 
+import '../../../data/models/people-model/people.dart';
+import '../../../infra/app/application-store.dart';
+import '../../../infra/dependency-injection/injectable.dart';
+import '../../../infra/routes/routes.dart';
+import '../../../presentation/presenters/home-page/home-page-presenter.dart';
+import '../../../ui/components/app-header.dart';
 import '../../constants.dart';
-import 'components/components.dart';
+import './components/components.dart';
 
 class HomePage extends StatefulWidget {
   @override

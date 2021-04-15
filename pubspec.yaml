@@ -1,8 +1,7 @@
 name: popcode_challenge_swapi
 description: A new Flutter project.
 
-
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -13,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  
+
   # Animations
   lottie: ^1.0.1
 
@@ -43,17 +42,14 @@ dependencies:
   # State management
   mobx: ^2.0.1
   flutter_mobx: ^2.0.0
-  
-  # State network
-  connectivity: ^3.0.3
-  
+
   # Metadata
   after_layout: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
+
   # Storage
   hive_generator: ^1.0.1
 
@@ -84,4 +80,3 @@ flutter:
     - lib/ui/assets/images/logo-app-dark.png
     - lib/ui/assets/images/logo-app-light.png
     - lib/ui/assets/images/1.png
-    

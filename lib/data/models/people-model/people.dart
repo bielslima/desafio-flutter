@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/remove-people-favorite/remove-people-favorite.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/set-people-favorite-local/set-people-favorite-local.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/verify-people-favorite/verify-people-favorite.dart';
+
+import '../../../domain/usecases/remove-people-favorite/remove-people-favorite.dart';
+import '../../../domain/usecases/set-people-favorite-local/set-people-favorite-local.dart';
 
 part 'people.g.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:popcode_challenge_swapi/ui/constants.dart';
+import '../../../../ui/constants.dart';
 
 class Logo extends StatelessWidget {
   @override

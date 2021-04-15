@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:popcode_challenge_swapi/data/models/models.dart';
-import 'package:popcode_challenge_swapi/data/models/people-model/people.dart';
-import 'package:popcode_challenge_swapi/data/models/query-species-model/query-species.dart';
-import 'package:popcode_challenge_swapi/domain/usecases/save-species-local-storage/save-species-local-storage.dart';
-import 'package:popcode_challenge_swapi/infra/constants.dart';
-import 'package:popcode_challenge_swapi/infra/dependency-injection/injectable.dart';
-import 'package:popcode_challenge_swapi/infra/repositories/People/people-repository.dart';
+
+import '../../../data/models/models.dart';
+import '../../../data/models/query-species-model/query-species.dart';
+import '../../../domain/usecases/save-species-local-storage/save-species-local-storage.dart';
+import '../../../infra/constants.dart';
+import '../../../infra/dependency-injection/injectable.dart';
+import '../../../infra/repositories/People/people-repository.dart';
 
 class FindAllSpecies {
   static Future execute() async {
